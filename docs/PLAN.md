@@ -5,25 +5,26 @@
 
 ---
 
-## M1 — Setup & Foundation
+## M1 — Setup & Foundation ✅
 
 **Branch:** `setup/foundation`
+**Status:** Concluído — commit `d60fa08`
 
 **Objetivo:** Inicializar o projeto com toda a configuração base — stack, design tokens, estrutura de pastas e ambiente de desenvolvimento funcional.
 
 ### Entregas
 
-- [ ] Criar projeto Next.js 15 com App Router e TypeScript strict
-- [ ] Configurar Tailwind CSS v4 com design tokens da Nexus
-- [ ] Instalar e configurar shadcn/ui (tema customizado dark)
-- [ ] Criar `src/styles/globals.css` com variáveis CSS (cores, tipografia, espaçamento)
-- [ ] Criar `src/styles/design-tokens.ts` com tokens como constantes TypeScript
-- [ ] Configurar fontes: Space Grotesk + Inter + JetBrains Mono (via next/font)
-- [ ] Criar estrutura de pastas completa conforme CLAUDE.md
-- [ ] Criar `.env.example` com todas as variáveis necessárias
-- [ ] Configurar `tsconfig.json` com path aliases (`@/components`, `@/lib`, etc.)
-- [ ] Configurar ESLint + Prettier
-- [ ] Criar `src/lib/utils.ts` com função `cn()`
+- [x] Criar projeto Next.js 15 com App Router e TypeScript strict
+- [x] Configurar Tailwind CSS v4 com design tokens da Nexus
+- [x] Instalar e configurar shadcn/ui (tema customizado dark)
+- [x] Criar `src/app/globals.css` com variáveis CSS (cores, tipografia, espaçamento)
+- [x] Criar `src/styles/design-tokens.ts` com tokens como constantes TypeScript
+- [x] Configurar fontes: Space Grotesk + Inter + JetBrains Mono (via next/font)
+- [x] Criar estrutura de pastas completa conforme CLAUDE.md
+- [x] Criar `.env.example` com todas as variáveis necessárias
+- [x] Configurar `tsconfig.json` com path aliases (`@/components`, `@/lib`, etc.)
+- [x] Configurar ESLint + Prettier
+- [x] Criar `src/lib/utils.ts` com função `cn()`
 
 **Commit final:** `feat: project setup — Next.js 15, Tailwind v4, shadcn/ui, design tokens`
 
