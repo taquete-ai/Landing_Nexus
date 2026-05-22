@@ -30,24 +30,26 @@
 
 ---
 
-## M2 — Layout Base
+## M2 — Layout Base ✅
 
-**Branch:** `feat/layout-base`
+**Branch:** `feat/layout-base` → mergeada em `setup/foundation` via PR #1
+**Status:** Concluído — commits `50ef4db`, `d39e3c7`, `04f5fa9`
 
 **Objetivo:** Construir a estrutura visual permanente da aplicação — Navbar, Footer e identidade visual aplicada globalmente.
 
 ### Entregas
 
-- [ ] Criar `src/components/layout/Navbar.tsx` — logo Nexus, links de navegação, CTA button
-- [ ] Criar `src/components/layout/Footer.tsx` — links, copyright, tagline
-- [ ] Aplicar noise texture sutil no background via CSS
-- [ ] Configurar `src/app/layout.tsx` com metadata base (title, description, OG)
-- [ ] Criar `src/app/page.tsx` com estrutura de seções (scaffolding vazio)
-- [ ] Implementar scroll indicator no Navbar (border-bottom on scroll)
-- [ ] Responsividade: Navbar mobile com menu hamburguer
-- [ ] Testar hierarquia tipográfica e paleta de cores em todos os breakpoints
+- [x] Criar `src/components/layout/Navbar.tsx` — logo mark (quadrado chartreuse + N), links, CTA, scroll indicator
+- [x] Criar `src/components/layout/Footer.tsx` — tagline, status pulsante, links, ícones sociais, copyright
+- [x] Aplicar noise texture sutil no background via CSS
+- [x] Configurar `src/app/layout.tsx` com Navbar + Footer globais e metadata base (title, description, OG)
+- [x] Criar `src/app/page.tsx` com scaffolding de anchors das seções M3–M8
+- [x] Implementar scroll indicator no Navbar (transparent → surface + border após 12px)
+- [x] Responsividade: menu mobile fullscreen com index mono e animação de entrada/saída
+- [x] Aplicar design system oficial: Syne / DM Sans / IBM Plex Mono, paleta Editorial Brutalist × Fintech Premium
+- [x] Revisar e corrigir bugs (useRef órfão, aria-hidden, --color-accent duplicado, sections auto-fechadas)
 
-**Commit final:** `feat: layout base — Navbar, Footer, identidade visual aplicada`
+**Commit final:** `fix: corrige problemas encontrados na revisão do M2` (`04f5fa9`)
 
 ---
 
