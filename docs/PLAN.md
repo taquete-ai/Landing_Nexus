@@ -85,28 +85,64 @@
 
 ---
 
-## M4 — Dashboard Demo
+## M4 — Dashboard Demo ✅
 
-**Branch:** `feat/dashboard-demo`
+**Branch:** `feat/dashboard-demo`  
+**Status:** Concluído — commit `8d5f38f`
 
 **Objetivo:** Criar o componente demonstrativo mais impactante da landing — dashboard visual que transmite autoridade técnica através de dados simulados.
 
 ### Entregas
 
-- [ ] Criar `src/components/sections/DashboardDemo.tsx`
-  - [ ] Layout em grid inspirado em SaaS premium
-  - [ ] Cards de métricas animadas (ex: "47 automações ativas", "3.2k leads processados")
-  - [ ] Barra de progresso de pipeline simulada com animação CSS
-  - [ ] Mini gráfico de linha (SVG nativo ou Recharts leve)
-  - [ ] Status badges (verde/amarelo) para sistemas ativos
-  - [ ] Ticker de atividade em tempo real (simulado com interval)
-  - [ ] Label "Live Demo" com indicador pulsante
-- [ ] Criar `src/types/dashboard.ts` — tipos para métricas e dados do dashboard
-- [ ] Criar `src/data/dashboard-mock.ts` — dados simulados estáticos
-- [ ] Efeito de entrada da seção com reveal on scroll
-- [ ] Responsividade: layout adaptado para mobile sem perder impacto
+- [x] Criar `src/components/sections/DashboardDemo.tsx` (6.8KB)
+  - [x] Layout grid responsivo (1 col mobile → 2 cols → 2x2 desktop)
+  - [x] Cabeçalho com badge DEMONSTRAÇÃO LIVE + pulsing indicator
+  - [x] Cards de métricas animadas (3: Automações, Leads, Integrações)
+  - [x] Barra de pipeline animada (1500ms ease, 68.4% de 342/500)
+  - [x] Mini gráfico semanal com pico/total (7 dias: Seg-Dom)
+  - [x] Status badges color-coded (online pulsing verde, idle laranja, offline vermelho)
+  - [x] Feed de atividades com 5 eventos e timestamps (há Nm, há Nh, etc.)
+  - [x] Label "AO VIVO" com indicador pulsante no feed
+- [x] Criar `src/components/sections/dashboard/MetricCard.tsx` (3.7KB)
+  - [x] Reveal animation on mount (100ms stagger)
+  - [x] Trend indicators (↑ up/green, ↓ down/red, → stable/blue)
+  - [x] Hover state (border accent, bg surface-2)
+  - [x] Design tokens (colors, fontFamily, fontSize)
+- [x] Criar `src/components/sections/dashboard/PipelineBar.tsx` (1.6KB)
+  - [x] Animated progress bar (width 0% → percentage em 1500ms)
+  - [x] Dynamic percentage label (68%)
+  - [x] Reference line visual (66% target)
+- [x] Criar `src/components/sections/dashboard/SystemStatus.tsx` (3.1KB)
+  - [x] 3 sistema indicators com status color-coded
+  - [x] Pulsing dots para online
+  - [x] Counter "2/3 operacional"
+- [x] Criar `src/components/sections/dashboard/MiniChart.tsx` (4.5KB)
+  - [x] Mini bar chart com animação (1000ms ease)
+  - [x] Week data visualization (Seg-Dom)
+  - [x] Peak + Total stats footer
+- [x] Criar `src/components/sections/dashboard/ActivityFeed.tsx` (5.5KB)
+  - [x] Staggered list animation (50ms delay)
+  - [x] Time-ago formatting (agora, há 2m, há 5h, há 1d)
+  - [x] Priority badges (alta/média/baixa com cores)
+  - [x] Live indicator (AO VIVO + pulsing dot)
+- [x] Criar `src/types/dashboard.ts` — tipos completos
+- [x] Criar `src/data/dashboard-mock.ts` — dados realistas
+- [x] Design system rigoroso
+  - [x] Chartreuse accent (#CAFF33) em CTAs e destaques
+  - [x] Tipografia Syne/DM Sans/IBM Plex Mono aplicada
+  - [x] Paleta completa: bg, surface, border, text hierarchy
+  - [x] Radius constraints (max 12px)
+  - [x] Noise texture overlay (0.03 opacity)
+- [x] Microinterações elegantes
+  - [x] Reveals on scroll (600ms)
+  - [x] Hover states em todos os cards
+  - [x] Progress animations (pipeline 1500ms, chart 1000ms)
+  - [x] Pulsing indicators (status online)
+- [x] Responsividade completa (mobile → tablet → desktop)
+- [x] TypeScript strict (0 erros)
+- [x] Integrado em `src/app/page.tsx`
 
-**Commit final:** `feat: dashboard demo — showcase visual de autoridade técnica`
+**Commit final:** `feat: implementa Dashboard Demo institucional com showcases de métricas, pipeline e atividades em tempo real` (8d5f38f)
 
 ---
 
@@ -313,7 +349,7 @@
 | M1 | Setup & Foundation | `setup/foundation` | ✅ | P0 |
 | M2 | Layout Base | `feat/layout-base` | ✅ | P0 |
 | M3 | Hero + CTA | `setup/foundation` (merged) | ✅ | P0 |
-| M4 | Dashboard Demo | `feat/dashboard-demo` | P0 |
+| M4 | Dashboard Demo | `feat/dashboard-demo` | ✅ | P0 |
 | M5 | Project Showcase | `feat/project-showcase` | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` | P1 |
 | M7 | Services + Tech Feed | `feat/services-feed` | P1 |
