@@ -1,19 +1,19 @@
 const FOOTER_LINKS = {
   Soluções: [
-    { label: "Agentes IA", href: "#solucoes" },
-    { label: "Automação", href: "#solucoes" },
-    { label: "CRM", href: "#solucoes" },
-    { label: "SaaS & MicroSaaS", href: "#solucoes" },
-    { label: "Dashboards", href: "#solucoes" },
+    { label: "Agentes IA",      href: "#solucoes" },
+    { label: "Automação",       href: "#solucoes" },
+    { label: "CRM",             href: "#solucoes" },
+    { label: "SaaS & MicroSaaS",href: "#solucoes" },
+    { label: "Dashboards",      href: "#solucoes" },
   ],
   Projetos: [
-    { label: "Portfólio", href: "#projetos" },
-    { label: "Cases", href: "#projetos" },
+    { label: "Portfólio",   href: "#projetos" },
+    { label: "Cases",       href: "#projetos" },
     { label: "Tecnologias", href: "#tecnologias" },
   ],
   Empresa: [
     { label: "Sobre a Nexus", href: "#" },
-    { label: "Contato", href: "#contato" },
+    { label: "Contato",       href: "#contato" },
   ],
 } as const
 
@@ -51,46 +51,59 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-[#1e1e1e] bg-[#0a0a0a]">
+    <footer className="border-t border-[#2a2a2e] bg-[#0c0c0e]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Topo do footer */}
+
+        {/* Topo */}
         <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-5">
+
           {/* Identidade */}
           <div className="lg:col-span-2">
-            <a
-              href="#"
-              className="inline-flex items-center gap-0.5 font-display text-lg font-bold tracking-tight"
-              aria-label="Nexus Labs"
-            >
-              <span className="text-[#f5f5f5]">NEXUS</span>
-              <span className="text-[#caff33]">LABS</span>
+            {/* Logo */}
+            <a href="#" className="inline-flex items-center gap-2 group" aria-label="Nexus Labs">
+              <span
+                className="flex size-7 items-center justify-center bg-[#caff33] text-[#0c0c0e] transition-colors duration-200 group-hover:bg-[#b8e62e]"
+                style={{ borderRadius: "4px", fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "13px" }}
+                aria-hidden="true"
+              >
+                N
+              </span>
+              <span className="font-display text-[15px] font-semibold tracking-tight text-[#e8e8e8]">
+                Nexus<span className="text-[#555559] font-normal"> Labs</span>
+              </span>
             </a>
-            <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-[#6b6b6b]">
+
+            <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-[#8a8a8f]">
               Ecossistema premium de IA, automação e desenvolvimento de software. Construímos sistemas inteligentes para empresas que querem escalar.
             </p>
 
             {/* Status operacional */}
-            <div className="mt-6 inline-flex items-center gap-2 border border-[#1e1e1e] px-3 py-1.5" style={{ borderRadius: "0.375rem" }}>
+            <div
+              className="mt-6 inline-flex items-center gap-2 border border-[#2a2a2e] px-3 py-1.5"
+              style={{ borderRadius: "6px" }}
+            >
               <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#caff33] opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-[#caff33]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2ed573] opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-[#2ed573]" />
               </span>
-              <span className="font-mono text-xs text-[#6b6b6b]">Sistemas operacionais</span>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#555559]">
+                Sistemas operacionais
+              </span>
             </div>
           </div>
 
-          {/* Links de navegação */}
+          {/* Links */}
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
             <div key={category}>
-              <h3 className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-[#6b6b6b]">
+              <h3 className="mb-4 font-mono text-xs font-medium uppercase tracking-widest text-[#555559]">
                 {category}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3" role="list">
                 {links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="font-body text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#f5f5f5]"
+                      className="font-body text-sm text-[#8a8a8f] transition-colors duration-200 hover:text-[#e8e8e8]"
                     >
                       {link.label}
                     </a>
@@ -101,17 +114,17 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Linha divisória */}
-        <div className="border-t border-[#1e1e1e]" />
+        {/* Divisor */}
+        <div className="border-t border-[#1e1e22]" />
 
-        {/* Base do footer */}
+        {/* Base */}
         <div className="flex flex-col items-start justify-between gap-4 py-6 sm:flex-row sm:items-center">
-          <p className="font-mono text-xs text-[#6b6b6b]">
+          <p className="font-mono text-xs text-[#555559]">
             © {currentYear} Nexus Labs AI Systems. Todos os direitos reservados.
           </p>
 
           {/* Social */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -119,7 +132,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="text-[#6b6b6b] transition-colors duration-200 hover:text-[#caff33]"
+                className="text-[#555559] transition-colors duration-200 hover:text-[#caff33]"
               >
                 {link.icon}
               </a>

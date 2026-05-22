@@ -5,18 +5,33 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─── Nexus Labs — Design Tokens ─────────────────────────────── */
+/* Direção: Editorial Brutalist × Fintech Premium                 */
 @theme {
-  --color-background:   #0a0a0a;
-  --color-surface:      #111111;
-  --color-border:       #1e1e1e;
-  --color-text-primary: #f5f5f5;
-  --color-text-muted:   #6b6b6b;
-  --color-accent:       #caff33;
-  --color-accent-dim:   #a8d400;
+  /* Backgrounds */
+  --color-bg:             #0c0c0e;
+  --color-surface:        #141416;
+  --color-surface-2:      #1a1a1e;
+  --color-border:         #2a2a2e;
+  --color-border-subtle:  #1e1e22;
 
-  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  --font-body:    var(--font-inter), "Inter", sans-serif;
-  --font-mono:    var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  /* Texto */
+  --color-text:           #e8e8e8;
+  --color-text-secondary: #8a8a8f;
+  --color-text-muted:     #555559;
+
+  /* Accent único */
+  --color-accent:         #caff33;
+
+  /* Semânticas */
+  --color-positive:       #2ed573;
+  --color-negative:       #ff4757;
+  --color-warm:           #ff6b35;
+  --color-cool:           #5b7fff;
+
+  /* Tipografia */
+  --font-display: var(--font-syne), "Syne", sans-serif;
+  --font-body:    var(--font-dm-sans), "DM Sans", sans-serif;
+  --font-mono:    var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
 }
 
 @theme inline {
@@ -46,25 +61,25 @@
 
 /* ─── Nexus Labs — Tema escuro permanente ─────────────────────── */
 :root {
-  --background:            #0a0a0a;
-  --foreground:            #f5f5f5;
-  --card:                  #111111;
-  --card-foreground:       #f5f5f5;
-  --popover:               #111111;
-  --popover-foreground:    #f5f5f5;
+  --background:            #0c0c0e;
+  --foreground:            #e8e8e8;
+  --card:                  #141416;
+  --card-foreground:       #e8e8e8;
+  --popover:               #141416;
+  --popover-foreground:    #e8e8e8;
   --primary:               #caff33;
-  --primary-foreground:    #0a0a0a;
-  --secondary:             #1e1e1e;
-  --secondary-foreground:  #f5f5f5;
-  --muted:                 #1e1e1e;
-  --muted-foreground:      #6b6b6b;
+  --primary-foreground:    #0c0c0e;
+  --secondary:             #1a1a1e;
+  --secondary-foreground:  #e8e8e8;
+  --muted:                 #1a1a1e;
+  --muted-foreground:      #555559;
   --accent:                #caff33;
-  --accent-foreground:     #0a0a0a;
-  --destructive:           oklch(0.577 0.245 27.325);
-  --border:                #1e1e1e;
-  --input:                 #1e1e1e;
+  --accent-foreground:     #0c0c0e;
+  --destructive:           #ff4757;
+  --border:                #2a2a2e;
+  --input:                 #1a1a1e;
   --ring:                  #caff33;
-  --radius:                0.375rem;
+  --radius:                0.5rem;  /* máx 8px nos componentes base */
 }
 
 /* ─── Base ────────────────────────────────────────────────────── */
@@ -87,14 +102,15 @@
     color: var(--foreground);
     font-family: var(--font-body);
     min-height: 100vh;
-    /* noise texture sutil */
+    /* noise texture sutil — textura > brilho */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.04em;
+    color: var(--foreground);
   }
 
   code, pre, kbd, samp {
@@ -103,6 +119,52 @@
 
   ::selection {
     background-color: #caff33;
-    color: #0a0a0a;
+    color: #0c0c0e;
   }
+}
+
+/* ─── Utilitários Nexus ───────────────────────────────────────── */
+@layer utilities {
+  /* Reveal on scroll — aplicar via JS (Intersection Observer) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delays para listas de cards */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+
+  /* Accent line on hover — usar em feature cards */
+  .accent-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .accent-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #caff33;
+    width: 0;
+    transition: width 0.4s ease;
+  }
+  .accent-line:hover::before {
+    width: 100%;
+  }
+
+  /* Fonte display utilitária */
+  .font-display { font-family: var(--font-display); }
+  .font-body    { font-family: var(--font-body); }
+  .font-mono    { font-family: var(--font-mono); }
 }
