@@ -1,6 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
 import { CTASection } from "@/components/sections/CTASection";
 import { DashboardDemo } from "@/components/sections/DashboardDemo";
+import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
+import { projectsMock } from "@/data/projects-mock";
 
 export default function Home() {
   return (
@@ -11,8 +13,10 @@ export default function Home() {
       {/* M4 — Dashboard Demo */}
       <DashboardDemo />
 
-      {/* M5+ — Seções futuras */}
-      <section id="projetos" aria-label="Projetos"></section>
+      {/* M5 — Project Showcase */}
+      <section id="projetos" aria-label="Projetos">
+        <ProjectShowcase projects={projectsMock} />
+      </section>
 
       {/* M6 — Tech Stack + Social Proof */}
       <section id="tecnologias" aria-label="Tecnologias"></section>
