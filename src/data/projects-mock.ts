@@ -11,12 +11,12 @@ export const projectsMock: ProjectType[] = [
     title: "Nexus Analytics Engine",
     description: "Plataforma de BI em tempo real com análise preditiva",
     longDescription:
-      "Engine analítico proprietário que processa 10M+ eventos/dia com latência sub-segundo. Machine learning integrado para forecast de métricas críticas. Pipeline modular com Kafka, ClickHouse e Redis.",
+      "Engine analítico proprietário que processa 480+ eventos/dia com latência sub-segundo. Machine learning integrado para forecast de métricas críticas. Pipeline modular com Kafka, ClickHouse e Redis.",
     category: "dashboard",
     featured: true,
     stack: ["Next.js", "Python", "ClickHouse", "Kafka", "TensorFlow"],
     metrics: [
-      { label: "Eventos/dia", value: "10M+" },
+      { label: "Eventos/dia", value: "480+" },
       { label: "Latência", value: "<100ms" },
       { label: "Uptime", value: "99.99%" },
     ],
@@ -33,9 +33,9 @@ export const projectsMock: ProjectType[] = [
     category: "crm",
     stack: ["Next.js", "Node.js", "PostgreSQL", "Prisma", "N8N"],
     metrics: [
-      { label: "Contatos", value: "500K+" },
-      { label: "Automações", value: "1200+" },
-      { label: "Taxa conversão", value: "+45%" },
+      { label: "Contatos", value: "980+" },
+      { label: "Automações", value: "8" },
+      { label: "Taxa conversão", value: "27.8%" },
     ],
     imageUrl: "/projects/pipeflow-crm.png",
     gradient: { from: "#141416", to: "#0C0C0E" },
@@ -50,8 +50,8 @@ export const projectsMock: ProjectType[] = [
     category: "automacao",
     stack: ["N8N", "Node.js", "PostgreSQL", "Claude API"],
     metrics: [
-      { label: "Workflows ativos", value: "450+" },
-      { label: "Tempo economia", value: "2000h/mês" },
+      { label: "Workflows ativos", value: "9" },
+      { label: "Tempo economia", value: "18h/mês" },
       { label: "Taxa sucesso", value: "99.8%" },
     ],
     imageUrl: "/projects/n8n-automation.png",
@@ -68,7 +68,7 @@ export const projectsMock: ProjectType[] = [
     featured: true,
     stack: ["Claude API", "TypeScript", "Supabase", "Redis"],
     metrics: [
-      { label: "Agentes em produção", value: "45+" },
+      { label: "Agentes em produção", value: "9" },
       { label: "Taxa acerto", value: "94.2%" },
       { label: "Tempo resposta", value: "2.3s" },
     ],
@@ -98,12 +98,12 @@ export const projectsMock: ProjectType[] = [
     title: "Dashboard Operacional Nexus",
     description: "Visualização em tempo real de métricas e KPIs",
     longDescription:
-      "Dashboard institucional com 40+ widgets, alertas inteligentes e customização por user. Suporta drill-down, comparações históricas e predições com ML.",
+      "Dashboard institucional com 12 widgets, alertas inteligentes e customização por user. Suporta drill-down, comparações históricas e predições com ML.",
     category: "dashboard",
     stack: ["React", "D3.js", "Recharts", "Supabase", "Real-time subscriptions"],
     metrics: [
-      { label: "Dados/segundo", value: "50K+" },
-      { label: "Widgets", value: "40+" },
+      { label: "Dados/segundo", value: "480+" },
+      { label: "Widgets", value: "12" },
       { label: "Refresh time", value: "200ms" },
     ],
     imageUrl: "/projects/dashboard-nexus.png",
@@ -119,7 +119,7 @@ export const projectsMock: ProjectType[] = [
     category: "integracao",
     stack: ["Node.js", "Express", "Redis", "PostgreSQL", "Prometheus"],
     metrics: [
-      { label: "Requests/dia", value: "500M+" },
+      { label: "Requests/dia", value: "28.8K" },
       { label: "P99 latência", value: "45ms" },
       { label: "Uptime", value: "99.99%" },
     ],
