@@ -19,10 +19,7 @@
   --color-text-secondary: #8a8a8f;
   --color-text-muted:     #555559;
 
-  /* Accent único */
-  --color-accent:         #caff33;
-
-  /* Semânticas */
+  /* Semânticas (não sobrepõe --color-accent do @theme inline) */
   --color-positive:       #2ed573;
   --color-negative:       #ff4757;
   --color-warm:           #ff6b35;

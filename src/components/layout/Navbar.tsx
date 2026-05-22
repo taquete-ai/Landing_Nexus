@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 
@@ -12,9 +12,8 @@ const NAV_LINKS = [
 ] as const
 
 export function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
-  const menuRef                   = useRef<HTMLDivElement>(null)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -112,14 +111,13 @@ export function Navbar() {
 
       {/* Menu mobile overlay */}
       <div
-        ref={menuRef}
         className={cn(
           "fixed inset-0 z-40 flex flex-col bg-[#0c0c0e] pt-16 transition-all duration-300 md:hidden",
           menuOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0",
         )}
-        aria-hidden={!menuOpen}
+        aria-hidden={menuOpen ? undefined : true}
       >
         <div className="flex flex-1 flex-col border-t border-[#2a2a2e] px-6 pt-8">
           {NAV_LINKS.map((link, i) => (
