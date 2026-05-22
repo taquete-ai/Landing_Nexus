@@ -87,8 +87,8 @@
 
 ## M4 — Dashboard Demo ✅
 
-**Branch:** `feat/dashboard-demo`  
-**Status:** Concluído — commit `8d5f38f`
+**Branch:** `feat/dashboard-demo` (merged via PR #3)  
+**Status:** Concluído e mergeado em main — commit `2f8cf1f`
 
 **Objetivo:** Criar o componente demonstrativo mais impactante da landing — dashboard visual que transmite autoridade técnica através de dados simulados.
 
@@ -98,7 +98,7 @@
   - [x] Layout grid responsivo (1 col mobile → 2 cols → 2x2 desktop)
   - [x] Cabeçalho com badge DEMONSTRAÇÃO LIVE + pulsing indicator
   - [x] Cards de métricas animadas (3: Automações, Leads, Integrações)
-  - [x] Barra de pipeline animada (1500ms ease, 68.4% de 342/500)
+  - [x] Barra de pipeline animada (1500ms ease, 18.4% de 37/200)
   - [x] Mini gráfico semanal com pico/total (7 dias: Seg-Dom)
   - [x] Status badges color-coded (online pulsing verde, idle laranja, offline vermelho)
   - [x] Feed de atividades com 5 eventos e timestamps (há Nm, há Nh, etc.)
@@ -110,7 +110,7 @@
   - [x] Design tokens (colors, fontFamily, fontSize)
 - [x] Criar `src/components/sections/dashboard/PipelineBar.tsx` (1.6KB)
   - [x] Animated progress bar (width 0% → percentage em 1500ms)
-  - [x] Dynamic percentage label (68%)
+  - [x] Dynamic percentage label (18.4%)
   - [x] Reference line visual (66% target)
 - [x] Criar `src/components/sections/dashboard/SystemStatus.tsx` (3.1KB)
   - [x] 3 sistema indicators com status color-coded
@@ -127,6 +127,13 @@
   - [x] Live indicator (AO VIVO + pulsing dot)
 - [x] Criar `src/types/dashboard.ts` — tipos completos
 - [x] Criar `src/data/dashboard-mock.ts` — dados realistas
+- [x] Atualizar Hero metrics com valores reais
+  - [x] 50+ → 12 (Projetos Entregues)
+  - [x] 25+ → 8 (Empresas Atendidas)
+  - [x] 7 → 8 (Tecnologias Premium)
+- [x] Atualizar Dashboard pipeline com valores calculados
+  - [x] 342/500 → 37/200 (18.4% de conversão)
+  - [x] 12 → 21 dias até meta
 - [x] Design system rigoroso
   - [x] Chartreuse accent (#CAFF33) em CTAs e destaques
   - [x] Tipografia Syne/DM Sans/IBM Plex Mono aplicada
@@ -138,11 +145,20 @@
   - [x] Hover states em todos os cards
   - [x] Progress animations (pipeline 1500ms, chart 1000ms)
   - [x] Pulsing indicators (status online)
-- [x] Responsividade completa (mobile → tablet → desktop)
-- [x] TypeScript strict (0 erros)
+- [x] Testes
+  - [x] 27/28 testes automatizados (96% pass rate)
+  - [x] 4 testes manuais (renderização, animações, design system, dados)
+  - [x] Responsividade completa (mobile → tablet → desktop)
+  - [x] TypeScript strict (0 erros)
+  - [x] Console clean (sem erros)
 - [x] Integrado em `src/app/page.tsx`
 
-**Commit final:** `feat: implementa Dashboard Demo institucional com showcases de métricas, pipeline e atividades em tempo real` (8d5f38f)
+**Commits finais:**
+- `feat: implementa Dashboard Demo institucional...` (8d5f38f)
+- `docs: marca M4 (Dashboard Demo) como concluído...` (65299b5)
+- `feat: atualiza métricas da Hero e Dashboard com valores reais...` (d9d42f2)
+
+**PR #3:** Merged to main ✓
 
 ---
 
@@ -349,8 +365,8 @@
 | M1 | Setup & Foundation | `setup/foundation` | ✅ | P0 |
 | M2 | Layout Base | `feat/layout-base` | ✅ | P0 |
 | M3 | Hero + CTA | `setup/foundation` (merged) | ✅ | P0 |
-| M4 | Dashboard Demo | `feat/dashboard-demo` | ✅ | P0 |
-| M5 | Project Showcase | `feat/project-showcase` | P0 |
+| M4 | Dashboard Demo | `feat/dashboard-demo` (merged) | ✅ | P0 |
+| M5 | Project Showcase | `feat/project-showcase` | ⏳ | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` | P1 |
 | M7 | Services + Tech Feed | `feat/services-feed` | P1 |
 | M8 | Formulário + Resend | `feat/contact-resend` | P1 |
