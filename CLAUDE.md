@@ -55,41 +55,88 @@ c:\dev\Landing_Nexus\
 
 ## Identidade Visual
 
+> Direção: **Editorial Brutalist × Fintech Premium**
+> Referência de estúdio de design — não de template genérico de IA.
+
 ### Paleta de Cores
 
+#### Backgrounds
 ```css
---background:   #0A0A0A   /* preto profundo */
---surface:      #111111   /* superfícies de cards */
---border:       #1E1E1E   /* bordas sutis */
---text-primary: #F5F5F5   /* texto principal */
---text-muted:   #6B6B6B   /* texto secundário */
---accent:       #CAFF33   /* chartreuse ácido — acento único */
---accent-dim:   #A8D400   /* acento hover/pressed */
+--bg:             #0C0C0E   /* fundo principal — quase preto com tint quente */
+--surface:        #141416   /* cards, sidebar, áreas elevadas */
+--surface-2:      #1A1A1E   /* hover states, featured cards */
+--border:         #2A2A2E   /* bordas visíveis */
+--border-subtle:  #1E1E22   /* divisores internos */
+```
+
+#### Texto
+```css
+--text:           #E8E8E8   /* títulos, texto primário */
+--text-secondary: #8A8A8F   /* corpo, descrições */
+--text-muted:     #555559   /* labels, placeholders, metadata */
+```
+
+#### Accent (uma cor só, com convicção)
+```css
+--accent:         #CAFF33   /* chartreuse ácido — CTAs, destaques, hover states */
+```
+
+Chartreuse é inesperado: não é cyan, não é roxo, não é o verde-teal que todo mundo usa. É reconhecível, tech-forward, impossível de ignorar.
+
+#### Semânticas
+```css
+--positive:       #2ED573   /* sucesso, conversão, ganho */
+--negative:       #FF4757   /* erro, perda, alerta */
+--warm:           #FF6B35   /* negociação, urgência */
+--cool:           #5B7FFF   /* novo, neutro, informativo */
 ```
 
 ### Tipografia
 
-- **Display / Headlines**: `Inter` ou `Space Grotesk` — peso 700–900, tracking tight
-- **Body**: `Inter` — peso 400–500
-- **Mono / Dados**: `JetBrains Mono` ou `Geist Mono` — para métricas e código
+#### Fontes
+- **Display**: `Syne` — peso 600–800, letter-spacing negativo em títulos (-1.5px a -2px)
+- **Body**: `DM Sans` — peso 300–600, line-height 1.65
+- **Mono/Dados**: `IBM Plex Mono` — peso 400–600, uppercase + tracking 0.1–0.2em para labels
 
-### Princípios Visuais
+#### Hierarquia
+| Elemento | Fonte | Tamanho | Peso | Cor |
+|---|---|---|---|---|
+| H1 hero | Syne | 48–64px | 800 | `--text` |
+| H2 seção | Syne | 28–42px | 700 | `--text` |
+| H3 card | Syne | 18px | 600 | `--text` |
+| Body | DM Sans | 14–17px | 400 | `--text-secondary` |
+| Label | IBM Plex Mono | 10–11px | 500 | `--text-muted` — uppercase, tracking 0.15em |
+| Métrica valor | Syne | 32px | 700 | `--text` |
+| Métrica delta | IBM Plex Mono | 11px | 400 | semântica |
+| Botão | DM Sans | 14px | 600 | `--bg` (em primary) |
+| Index (01, 02) | IBM Plex Mono | 11px | 400 | `--text-muted` |
 
-**Permitido:**
-- noise texture sutil no background
-- reveal on scroll (Intersection Observer, sem libs pesadas)
-- hover com linha accent (`border-accent`) ou cor chartreuse
-- microinterações em `transition-all duration-200`
-- grids modulares com espaçamento 8px base
-- dashboards demonstrativos com dados simulados
+### Princípios de Design
 
-**Proibido:**
-- glassmorphism exagerado (sem `backdrop-blur` visível excessivo)
-- neon glow / `text-shadow` colorido
-- partículas flutuantes (sem `canvas` decorativo)
-- gradient text colorido
-- bordas excessivamente arredondadas (`rounded-3xl` em containers)
-- animações sem propósito funcional
+1. **Contenção > Espetáculo** — um acento bem posicionado vale mais que 10 efeitos
+2. **Dados como interface** — o pipeline é o visual; sem enfeite decorativo
+3. **Tipografia com caráter** — fontes com opinião, não genéricas
+4. **Brutalidade controlada** — edges afiados, grid modular, sem border-radius exagerado (máx. 12px)
+5. **Textura > Brilho** — noise grain no fundo em vez de glow e blur
+
+### Efeitos Permitidos
+
+- **Noise texture** — SVG overlay no body, opacity 0.03
+- **Reveal on scroll** — `translateY(16px) + opacity 0 → 0 + 1`, transition 0.6s ease, stagger 0.1s
+- **Accent line on hover** — `::before` no topo do card, width `0 → 100%`, transition 0.4s
+- **Pipeline bar animation** — width `0% → valor real`, transition 1.5s ease
+- **Microinterações** — `transition-all duration-200`
+
+### Proibido
+
+- Glassmorphism / `backdrop-filter: blur()`
+- Gradient text colorido
+- Partículas flutuantes / `canvas` decorativo
+- Neon glow / `text-shadow` colorido
+- `border-radius` > 12px em containers
+- Múltiplas cores competindo (1 accent basta)
+- Animações sem propósito funcional
+- `animate-float` / órbitas flutuantes
 
 ---
 
@@ -125,9 +172,11 @@ c:\dev\Landing_Nexus\
 
 ## Referências de Design
 
-- **Linear** — minimalismo, tipografia forte, brutalismo elegante
-- **Stripe** — estrutura editorial, hierarquia visual, autoridade corporativa
-- **Vercel** — showcase técnico, cultura de engenharia, estética clean
+- **Linear** — minimalismo premium, tipografia forte, brutalismo elegante, motion minimalista
+- **Stripe** — estrutura institucional, grids organizados, hierarquia visual, composição editorial
+- **Vercel** — showcase técnico, cultura de engenharia, estética clean, interfaces orientadas a produto
+
+> Design system versionado em `pipeflow-brand-guide-v2.md` (compartilhado entre projetos Nexus).
 
 ---
 
