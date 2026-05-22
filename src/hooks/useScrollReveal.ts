@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 
 interface UseScrollRevealOptions {
   threshold?: number | number[];
@@ -8,9 +8,13 @@ interface UseScrollRevealOptions {
 }
 
 export function useScrollReveal(options: UseScrollRevealOptions = {}) {
-  const { threshold = 0.1, rootMargin = "-50px" } = options;
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const observerOptions = useMemo(() => {
+    const { threshold = 0.1, rootMargin = "-50px" } = options;
+    return { threshold, rootMargin };
+  }, [options]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -20,7 +24,7 @@ export function useScrollReveal(options: UseScrollRevealOptions = {}) {
           observer.unobserve(entry.target);
         }
       },
-      { threshold, rootMargin }
+      observerOptions
     );
 
     if (ref.current) {
@@ -28,7 +32,7 @@ export function useScrollReveal(options: UseScrollRevealOptions = {}) {
     }
 
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [observerOptions]);
 
   return { ref, isVisible };
 }

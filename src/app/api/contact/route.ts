@@ -6,6 +6,8 @@ interface ContactFormData {
   company?: string;
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(request: NextRequest) {
   try {
     const body: ContactFormData = await request.json();
@@ -15,6 +17,13 @@ export async function POST(request: NextRequest) {
     if (!name || !email) {
       return NextResponse.json(
         { error: "Nome e e-mail são obrigatórios" },
+        { status: 400 }
+      );
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      return NextResponse.json(
+        { error: "E-mail inválido" },
         { status: 400 }
       );
     }
