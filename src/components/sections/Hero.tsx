@@ -4,9 +4,9 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
 
 const metrics = [
-  { value: "50+", label: "Projetos Entregues" },
-  { value: "25+", label: "Empresas Atendidas" },
-  { value: "7", label: "Tecnologias Premium" },
+  { value: "12", label: "Projetos Entregues" },
+  { value: "8", label: "Empresas Atendidas" },
+  { value: "8", label: "Tecnologias Premium" },
 ];
 
 export function Hero() {

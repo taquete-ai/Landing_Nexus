@@ -150,7 +150,7 @@ export function DashboardDemo() {
                       fontFamily: fontFamily.display,
                     }}
                   >
-                    68.4%
+                    18.4%
                   </p>
                 </div>
                 <div>
@@ -175,7 +175,7 @@ export function DashboardDemo() {
                       fontFamily: fontFamily.display,
                     }}
                   >
-                    12
+                    21
                   </p>
                 </div>
               </div>

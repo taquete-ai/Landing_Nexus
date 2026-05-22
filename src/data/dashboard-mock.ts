@@ -22,8 +22,8 @@ export const dashboardData: DashboardData = {
     },
   ],
   pipeline: {
-    current: 342,
-    target: 500,
+    current: 37,
+    target: 200,
   },
   systemStatus: [
     { name: "Sistema de CRM", status: "online" },
