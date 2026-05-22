@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { CTASection } from "@/components/sections/CTASection";
+import { DashboardDemo } from "@/components/sections/DashboardDemo";
 
 export default function Home() {
   return (
@@ -8,9 +9,9 @@ export default function Home() {
       <Hero />
 
       {/* M4 — Dashboard Demo */}
-      <section id="dashboard" aria-label="Dashboard Demo"></section>
+      <DashboardDemo />
 
-      {/* M5 — Project Showcase */}
+      {/* M5+ — Seções futuras */}
       <section id="projetos" aria-label="Projetos"></section>
 
       {/* M6 — Tech Stack + Social Proof */}
