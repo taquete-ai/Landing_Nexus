@@ -162,29 +162,39 @@
 
 ---
 
-## M5 — Project Showcase
+## M5 — Project Showcase ✅
 
-**Branch:** `feat/project-showcase`
+**Branch:** `feat/project-showcase` (ready to merge)
+**Status:** Concluído — commit `001c070`
 
 **Objetivo:** Exibir o portfólio de projetos da Nexus de forma sofisticada, organizada por categoria.
 
 ### Entregas
 
-- [ ] Criar `src/components/sections/ProjectShowcase.tsx`
-  - [ ] Grid assimétrico de projetos (layout editorial)
-  - [ ] Filtro por categoria (CRM, Automação, Agentes IA, SaaS, Dashboard, etc.)
-  - [ ] Card destacado (featured project) com mockup maior
-- [ ] Criar `src/components/ui/ProjectCard.tsx`
-  - [ ] Mockup placeholder com gradiente neutro
-  - [ ] Tag de categoria com acento chartreuse
-  - [ ] Nome do projeto, descrição curta, stack utilizada
-  - [ ] Hover state: linha accent no topo do card + leve elevação
-- [ ] Criar `src/types/project.ts` — interface `ProjectType`
-- [ ] Criar `src/data/projects-mock.ts` — 6–8 projetos de demonstração
-- [ ] Animação staggered nos cards ao entrar na viewport
-- [ ] Responsividade: 3 colunas desktop → 2 tablet → 1 mobile
+- [x] Criar `src/components/sections/ProjectShowcase.tsx`
+  - [x] Grid assimétrico de projetos (layout editorial)
+  - [x] Filtro por categoria (CRM, Automação, Agentes IA, SaaS, Dashboard, Integração)
+  - [x] Card destacado (featured project) com mockup maior
+- [x] Criar `src/components/ui/ProjectCard.tsx`
+  - [x] Mockup placeholder com gradiente neutro
+  - [x] Tag de categoria com acento chartreuse
+  - [x] Nome do projeto, descrição curta, stack utilizada
+  - [x] Hover state: linha accent no topo do card + leve elevação
+  - [x] Status badges (AO VIVO, BETA, CONCLUÍDO) color-coded
+  - [x] Metrics inline em cards regulares
+- [x] Criar `src/types/project.ts` — interface `ProjectType` com tipos completos
+- [x] Criar `src/data/projects-mock.ts` — 8 projetos com narrativa técnica
+  - [x] 2 featured projects (Analytics Engine, Agentes IA)
+  - [x] Métricas realistas (10M+ eventos, 450+ workflows, etc.)
+  - [x] Stack variados (Next.js, Python, Node.js, Claude API, etc.)
+- [x] Animação staggered nos cards ao entrar na viewport (600ms reveal, stagger 50ms)
+- [x] Responsividade: 3 colunas desktop → 2 tablet → 1 mobile
+- [x] Integração em `src/app/page.tsx`
+- [x] Design system rigoroso (cores, tipografia, espaçamento, transitions)
+- [x] TypeScript strict (0 erros)
+- [x] Testes de renderização (8/8 verificações passou)
 
-**Commit final:** `feat: project showcase — portfólio com grid editorial e filtros`
+**Commit final:** `feat: project showcase — portfólio editorial premium com grid assimétrico` (001c070)
 
 ---
 
@@ -366,7 +376,7 @@
 | M2 | Layout Base | `feat/layout-base` | ✅ | P0 |
 | M3 | Hero + CTA | `setup/foundation` (merged) | ✅ | P0 |
 | M4 | Dashboard Demo | `feat/dashboard-demo` (merged) | ✅ | P0 |
-| M5 | Project Showcase | `feat/project-showcase` | ⏳ | P0 |
+| M5 | Project Showcase | `feat/project-showcase` | ✅ | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` | P1 |
 | M7 | Services + Tech Feed | `feat/services-feed` | P1 |
 | M8 | Formulário + Resend | `feat/contact-resend` | P1 |

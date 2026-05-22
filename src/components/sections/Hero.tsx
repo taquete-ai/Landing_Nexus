@@ -2,6 +2,7 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const metrics = [
   { value: "12", label: "Projetos Entregues" },
@@ -11,6 +12,21 @@ const metrics = [
 
 export function Hero() {
   const { ref, isVisible } = useScrollReveal();
+  const router = useRouter();
+
+  const handleScrollToProjetos = () => {
+    const projetosSection = document.getElementById("projetos");
+    if (projetosSection) {
+      projetosSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleContactForm = () => {
+    const ctaSection = document.getElementById("contato");
+    if (ctaSection) {
+      ctaSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -84,6 +100,7 @@ export function Hero() {
           style={{ transitionDelay: "0.4s" }}
         >
           <button
+            onClick={handleScrollToProjetos}
             className="px-8 py-3 font-body font-semibold rounded-md hover:opacity-90 transition-opacity duration-200"
             style={{
               backgroundColor: "var(--color-accent)",
@@ -94,6 +111,7 @@ export function Hero() {
             Conheça os Projetos
           </button>
           <button
+            onClick={handleContactForm}
             className="px-8 py-3 font-body font-semibold rounded-md transition-all duration-200"
             style={{
               borderColor: "var(--color-border)",
