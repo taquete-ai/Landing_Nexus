@@ -1,8 +1,11 @@
+import { Hero } from "@/components/sections/Hero";
+import { CTASection } from "@/components/sections/CTASection";
+
 export default function Home() {
   return (
     <main className="pt-16">
       {/* M3 — Hero + CTA */}
-      <section id="hero" aria-label="Hero"></section>
+      <Hero />
 
       {/* M4 — Dashboard Demo */}
       <section id="dashboard" aria-label="Dashboard Demo"></section>
@@ -16,8 +19,8 @@ export default function Home() {
       {/* M7 — Services + Tech Feed */}
       <section id="solucoes" aria-label="Soluções"></section>
 
-      {/* M3/M8 — CTA + Contato */}
-      <section id="contato" aria-label="Contato"></section>
+      {/* M8 — CTA + Contato */}
+      <CTASection />
     </main>
-  )
+  );
 }
