@@ -53,30 +53,35 @@
 
 ---
 
-## M3 — Hero + CTA
+## M3 — Hero + CTA ✅
 
-**Branch:** `feat/hero-cta`
+**Branch:** `setup/foundation` (merged em main via PR #2)  
+**Status:** Concluído — commits `ee380bc`, `b71e2c1`
 
 **Objetivo:** Construir a primeira dobra da landing — seção de entrada com impacto máximo e call-to-action estratégico.
 
 ### Entregas
 
-- [ ] Criar `src/components/sections/Hero.tsx`
-  - [ ] Headline principal com hierarquia tipográfica dominante
-  - [ ] Subheadline descritivo da proposta de valor
-  - [ ] Badge/tag de posicionamento (ex: "AI Systems Laboratory")
-  - [ ] CTA primário ("Conheça os Projetos") e secundário ("Fale com a Nexus")
-  - [ ] Métricas/stats institucionais (projetos entregues, clientes, tecnologias)
-  - [ ] Indicador de scroll animado
-- [ ] Criar `src/components/sections/CTASection.tsx`
-  - [ ] Headline de conversão
-  - [ ] Formulário de captura de lead (nome, email, empresa)
-  - [ ] CTA final com acento chartreuse
-- [ ] Criar `src/hooks/useScrollReveal.ts` — Intersection Observer para reveal on scroll
-- [ ] Aplicar animações de entrada suaves (CSS transitions, sem libs)
-- [ ] Responsividade completa Hero + CTA em mobile/tablet/desktop
+- [x] Criar `src/components/sections/Hero.tsx`
+  - [x] Headline principal com hierarquia tipográfica dominante (Syne 800, 64px)
+  - [x] Subheadline descritivo da proposta de valor
+  - [x] Badge/tag de posicionamento ("AI Systems Laboratory")
+  - [x] CTA primário ("Conheça os Projetos") e secundário ("Fale com a Nexus")
+  - [x] Métricas/stats institucionais (50+, 25+, 7)
+  - [x] Indicador de scroll animado (ChevronDown com animate-pulse)
+- [x] Criar `src/components/sections/CTASection.tsx`
+  - [x] Headline de conversão
+  - [x] Formulário de captura de lead (nome, email, empresa) com validação
+  - [x] CTA final com acento chartreuse + loading state
+- [x] Criar `src/hooks/useScrollReveal.ts` — Intersection Observer com useMemo optimization
+- [x] Aplicar animações de entrada suaves (0.6s ease, stagger 0.1s)
+- [x] Responsividade completa mobile/tablet/desktop
+- [x] Validação server-side com regex email
+- [x] Feedback visual (success/error) no formulário
 
-**Commit final:** `feat: hero section e CTA — primeira dobra com conversão`
+**Commits finais:**
+- `feat: hero section e cta — primeira dobra com impacto visual e conversão` (ee380bc)
+- `refactor: otimiza useScrollReveal hook e valida email no servidor` (b71e2c1)
 
 ---
 
@@ -303,11 +308,11 @@
 
 ## Resumo de Milestones
 
-| # | Milestone | Branch | Prioridade |
-|---|---|---|---|
-| M1 | Setup & Foundation | `setup/foundation` | P0 |
-| M2 | Layout Base | `feat/layout-base` | P0 |
-| M3 | Hero + CTA | `feat/hero-cta` | P0 |
+| # | Milestone | Branch | Status | Prioridade |
+|---|---|---|---|---|
+| M1 | Setup & Foundation | `setup/foundation` | ✅ | P0 |
+| M2 | Layout Base | `feat/layout-base` | ✅ | P0 |
+| M3 | Hero + CTA | `setup/foundation` (merged) | ✅ | P0 |
 | M4 | Dashboard Demo | `feat/dashboard-demo` | P0 |
 | M5 | Project Showcase | `feat/project-showcase` | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` | P1 |
