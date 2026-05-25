@@ -27,11 +27,12 @@ export const projectsMock: ProjectType[] = [
   {
     id: "2",
     title: "PipeFlow CRM",
-    description: "Sistema CRM multicanal com automação de vendas",
+    description: "Infraestrutura operacional proprietária de Nexus Labs AI Systems",
     longDescription:
-      "CRM empresarial com orquestração de workflows, integrações nativas e dashboard operacional. Suporta multi-channel (email, WhatsApp, SMS) com IA para routing inteligente.",
+      "PipeFlow é a infraestrutura CRM propriedade de Nexus Labs AI Systems — sistema multicanal com orquestração de workflows inteligentes, integrações nativas e dashboard operacional em tempo real. Suporta multi-channel (email, WhatsApp, SMS, webhooks) com roteamento automático baseado em IA para maximizar conversão. Núcleo da operação: captura de leads, automações de vendas, integração com N8N e Claude API para diagnósticos conversacionais. Disclaimer: PipeFlow é uma solução proprietária desenvolvida e mantida por Nexus Labs — não é um produto open-source ou SaaS terceiro.",
     category: "crm",
-    stack: ["Next.js", "Node.js", "PostgreSQL", "Prisma", "N8N"],
+    featured: false,
+    stack: ["Next.js", "Node.js", "PostgreSQL", "Prisma", "N8N", "Claude API"],
     metrics: [
       { label: "Contatos", value: "980+" },
       { label: "Automações", value: "8" },

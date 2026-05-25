@@ -1,19 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  company?: string;
-}
+import { ingestLeadToPipeFlow, mapPipeFlowError } from "@/lib/pipeflow";
+import type { PipeFlowLeadPayload } from "@/types/lead";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
   try {
-    const body: ContactFormData = await request.json();
+    const body = await request.json();
+    const { name, email, company, source, conversationSummary, identifiedPain, suggestedSolution, interestLevel } = body;
 
-    const { name, email, company } = body;
-
+    // Validação básica
     if (!name || !email) {
       return NextResponse.json(
         { error: "Nome e e-mail são obrigatórios" },
@@ -28,20 +24,46 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: M8 — Integrar Resend para envio de e-mail
-    // TODO: M9 — Salvar lead na tabela Supabase
+    // Construir payload para PipeFlow
+    const leadPayload: PipeFlowLeadPayload = {
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      company: company?.trim(),
+      source: source || "form",
+      conversationSummary,
+      identifiedPain,
+      suggestedSolution,
+      interestLevel,
+      metadata: {
+        timestamp: new Date().toISOString(),
+        userAgent: request.headers.get("user-agent"),
+        origin: request.headers.get("origin"),
+      },
+    };
 
-    console.log("Lead recebido:", { name, email, company, timestamp: new Date() });
+    // Enviar para PipeFlow
+    const result = await ingestLeadToPipeFlow(leadPayload);
 
     return NextResponse.json(
-      { success: true, message: "Lead capturado com sucesso" },
+      {
+        success: true,
+        message: "Lead capturado com sucesso",
+        leadId: result.leadId,
+      },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Erro ao processar contato:", error);
+    // Mapear erro de PipeFlow para resposta apropriada
+    const { status, message } = mapPipeFlowError(error);
+
+    console.error("[API Contact] Erro ao processar lead:", {
+      error: error instanceof Error ? error.message : String(error),
+      timestamp: new Date().toISOString(),
+    });
+
     return NextResponse.json(
-      { error: "Erro interno do servidor" },
-      { status: 500 }
+      { error: message },
+      { status }
     );
   }
 }
