@@ -284,29 +284,73 @@
 
 ---
 
-## M7 — Services + Tech Feed
+## M7 — Services + Tech Feed ✅
 
-**Branch:** `feat/services-feed`
+**Branch:** `feat/services-feed` (commit `dc55e97`)
+**Status:** Concluído — commit `dc55e97`
 
-**Objetivo:** Apresentar os serviços da Nexus e criar a seção de conteúdo tecnológico dinâmico (estático por enquanto).
+**Objetivo:** Apresentar os serviços da Nexus e criar seção de inteligência tecnológica contínua. Transformar landing em ecossistema tecnológico vivo que gera retorno recorrente.
 
 ### Entregas
 
-- [ ] Criar `src/components/sections/Services.tsx`
-  - [ ] Cards de serviços: IA & Agentes, Automação, CRM, SaaS, Dashboards, Integrações
-  - [ ] Ícone + título + descrição curta por serviço
-  - [ ] Hover com accent border-left chartreuse
-- [ ] Criar `src/components/sections/TechFeed.tsx`
-  - [ ] Grid de cards de notícias/atualizações tecnológicas
-  - [ ] Tag de categoria (IA, Automação, SaaS, etc.)
-  - [ ] Data, título, excerpt
-  - [ ] Link externo (abre em nova aba)
-  - [ ] Label "NEXUS INTEL" com indicador de atualização
-- [ ] Criar `src/types/feed.ts` — interface `FeedItemType`
-- [ ] Criar `src/data/tech-feed-mock.ts` — 6 artigos de demonstração
-- [ ] Responsividade: 3 colunas → 1 coluna
+- [x] Criar `src/components/sections/Services.tsx` (290 linhas)
+  - [x] 6 cards: IA & Agentes, Automação, CRM, SaaS, Dashboards, Integrações
+  - [x] Ícone SVG inline (32×32px) + h3 Syne + descrição DM Sans + badge categoria
+  - [x] Hover elegante: border-left chartreuse animada (0→4px em 400ms), surface-2 bg, elevação
+  - [x] Grid responsivo: auto-fit minmax(320px, 1fr) → 3 cols desktop, 2 tablet, 1 mobile
+  - [x] Scroll reveal: stagger 300ms + (idx × 50ms), 600ms ease
+  - [x] IntersectionObserver manual (padrão M6)
 
-**Commit final:** `feat: services e tech feed — serviços e conteúdo tecnológico`
+- [x] Criar `src/components/sections/TechFeed.tsx` (310 linhas)
+  - [x] Label "NEXUS INTEL" com indicador pulsante @keyframes
+  - [x] Grid 6 artigos: auto-fit minmax(340px, 1fr) → 3 cols desktop, 2 tablet, 1 mobile
+  - [x] Tag categoria IBM Plex Mono uppercase, surface-2 background
+  - [x] Data, h3 Syne 600, excerpt DM Sans 14px (2-line clamp)
+  - [x] Link externo hover: text-secondary → accent + underline
+  - [x] Indicadores: NOVO (green), EM ALTA (orange), DESTAQUE (chartreuse)
+  - [x] Hover: border-top 2px chartreuse em 200ms, bg transition
+  - [x] Scroll reveal: stagger 300ms + (idx × 50ms), 600ms ease
+
+- [x] Criar `src/types/services.ts` (27 linhas)
+  - [x] `ServiceType`: id, name, category, description, icon
+  - [x] `FeedItemType`: id, category, title, excerpt, date, link, indicator?
+  - [x] Type unions: `ServiceCategory` (ia|automacao|crm|saas|dashboards|integracao)
+  - [x] `FeedCategory` (ia|automacao|saas|crm|agentes|infraestrutura|engineering)
+
+- [x] Criar `src/data/services-mock.ts` (37 linhas)
+  - [x] 6 serviços com descrição operacional realista
+
+- [x] Criar `src/data/tech-feed-mock.ts` (45 linhas)
+  - [x] 6 artigos com narrativa técnica (Claude 3.7, Automação 10x, SaaS Escalável, etc.)
+  - [x] Indicadores: new, trending, featured
+
+- [x] Integração em `src/app/page.tsx`
+  - [x] Imports Services + TechFeed
+  - [x] Renderização após SocialProof (M6), antes CTASection (M8)
+  - [x] Section wrapper: id="solucoes" aria-label="Soluções"
+
+- [x] Design system integral
+  - [x] Tipografia: Syne (h2 28px clamp, h3 18px), DM Sans (16px body, 14px excerpt)
+  - [x] Cores: bg #0c0c0e, surface #141416, surface-2 #1a1a1e, accent #caff33
+  - [x] Transitions: reveal 600ms ease, accentLine 400ms ease, normal 200ms ease
+  - [x] Espaçamento: 96px top/bottom (spacing.unit(12)), 24px grid gap (spacing.unit(3))
+  - [x] Radius: máx 12px, sem blur backdrop, sem gradientes coloridos
+
+- [x] Responsividade & Acessibilidade
+  - [x] Desktop → tablet → mobile: 3 cols → 2 cols → 1 col
+  - [x] Links: target="_blank" rel="noopener noreferrer"
+  - [x] Semântica: <section> tags com aria-label
+
+- [x] Build production
+  - [x] Compilação: 20.8s ✓
+  - [x] Page size: 15.4kB + 118kB First Load JS
+  - [x] TypeScript strict: 0 errors
+
+**Commits:**
+- `feat: services e tech feed — estratégia de autoridade contínua (M7)` (dc55e97)
+
+**Objetivo estratégico concretizado:**
+Seções premium que funcionam como centro de atualizações (NEXUS INTEL), catálogo de serviços operacionais, mecanismo de retorno recorrente e demonstração de atividade contínua do laboratório.
 
 ---
 
@@ -420,7 +464,7 @@
 | M4 | Dashboard Demo | `feat/dashboard-demo` (merged) | ✅ | P0 |
 | M5 | Project Showcase | `feat/project-showcase` (merged PR #4) | ✅ | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` (merged PR #5) | ✅ | P0 |
-| M7 | Services + Tech Feed | `feat/services-feed` | — | P1 |
+| M7 | Services + Tech Feed | `feat/services-feed` (commit dc55e97) | ✅ | P1 |
 | M8 | PipeFlow Integration | `feat/pipeflow-integration` | — | P1 |
 | M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` | — | P2 |
 | M10 | SEO + Performance | `feat/seo-performance` | — | P1 |
