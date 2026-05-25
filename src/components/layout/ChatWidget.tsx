@@ -36,6 +36,9 @@ export function ChatWidget() {
         // Reset if corrupted
         sessionStorage.removeItem("nexus_chat_history");
       }
+    } else {
+      // Clear rate limit state on new session — permite primeira mensagem sem blockeio
+      localStorage.removeItem("nexus_chat_rate_limit");
     }
   }, []);
 
@@ -51,13 +54,6 @@ export function ChatWidget() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Rate limit check
-    const rateCheck = checkRateLimit();
-    if (!rateCheck.allowed) {
-      setSubmitError(rateCheck.message || "Muitas requisições");
-      return;
-    }
-
     const userMessage: ChatMessage = {
       role: "user",
       content: input.trim(),
@@ -68,6 +64,14 @@ export function ChatWidget() {
     setInput("");
     setIsLoading(true);
     setSubmitError("");
+
+    // Rate limit check — movido após setIsLoading para melhor UX
+    const rateCheck = checkRateLimit();
+    if (!rateCheck.allowed) {
+      setIsLoading(false);
+      setSubmitError(rateCheck.message || "Muitas requisições");
+      return;
+    }
 
     const response = await sendChatMessage(newMessages);
     setIsLoading(false);
@@ -142,7 +146,7 @@ export function ChatWidget() {
   const hasStarted = messages.length > 0;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-body">
+    <div className="fixed bottom-20 right-6 z-50 font-body">
       {/* Floating Button */}
       {!isOpen && (
         <button
@@ -163,7 +167,7 @@ export function ChatWidget() {
               <div className="w-2 h-2 rounded-full bg-positive animate-pulse" />
               <div>
                 <h3 className="text-sm font-semibold text-text font-display">
-                  Nexus AI
+                  NEX
                 </h3>
                 <p className="text-xs text-text-secondary">Online</p>
               </div>
@@ -182,7 +186,7 @@ export function ChatWidget() {
             {!hasStarted && (
               <div className="flex items-center justify-center h-full">
                 <p className="text-center text-text-secondary text-sm max-w-xs">
-                  Olá! Sou um consultor da Nexus. Como posso ajudar sua operação hoje?
+                  Olá! Sou o NEX, um consultor da Nexus. Como posso ajudar sua operação hoje?
                 </p>
               </div>
             )}
