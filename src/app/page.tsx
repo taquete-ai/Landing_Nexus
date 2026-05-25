@@ -4,6 +4,8 @@ import { DashboardDemo } from "@/components/sections/DashboardDemo";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { TechStack } from "@/components/sections/TechStack";
 import { SocialProof } from "@/components/sections/SocialProof";
+import { Services } from "@/components/sections/Services";
+import { TechFeed } from "@/components/sections/TechFeed";
 import { projectsMock } from "@/data/projects-mock";
 
 export default function Home() {
@@ -25,7 +27,10 @@ export default function Home() {
       <SocialProof />
 
       {/* M7 — Services + Tech Feed */}
-      <section id="solucoes" aria-label="Soluções"></section>
+      <section id="solucoes" aria-label="Soluções">
+        <Services />
+        <TechFeed />
+      </section>
 
       {/* M8 — CTA + Contato */}
       <CTASection />
