@@ -164,7 +164,7 @@
 
 ## M5 — Project Showcase ✅
 
-**Branch:** `feat/project-showcase` (ready to merge)
+**Branch:** `feat/project-showcase` (merged via PR #4)
 **Status:** Concluído — commit `001c070`
 
 **Objetivo:** Exibir o portfólio de projetos da Nexus de forma sofisticada, organizada por categoria.
@@ -198,27 +198,89 @@
 
 ---
 
-## M6 — Tech Stack + Social Proof
+## M6 — Tech Stack + Social Proof ✅
 
-**Branch:** `feat/tech-social`
+**Branch:** `feat/tech-social` (merged via PR #5)
+**Status:** Concluído — commit `a1e52d2`
 
-**Objetivo:** Reforçar autoridade técnica exibindo tecnologias dominadas e logos de clientes/parceiros.
+**Objetivo:** Reforçar autoridade técnica exibindo tecnologias dominadas (16 total), logos de clientes/parceiros (12 total) e ferramentas IA estratégicas (6 total).
 
 ### Entregas
 
-- [ ] Criar `src/components/sections/TechStack.tsx`
-  - [ ] Grid de ícones/logos de tecnologias (Next.js, Supabase, Claude, N8N, etc.)
-  - [ ] Agrupamento por categoria (Frontend, Backend, IA, Automação, Infra)
-  - [ ] Hover com nome da tecnologia e tooltip
-- [ ] Criar `src/components/sections/SocialProof.tsx`
-  - [ ] Marquee horizontal de logos de clientes/parceiros (CSS animation, sem lib)
-  - [ ] Versão pausada no hover
-  - [ ] Contador institucional (ex: "+20 empresas atendidas")
-- [ ] Criar `src/data/tech-stack.ts` — lista de tecnologias com ícone e categoria
-- [ ] Criar `src/data/clients.ts` — logos e nomes de clientes
-- [ ] Responsividade completa
+- [x] Criar `src/components/sections/TechStack.tsx` (423 linhas)
+  - [x] Grid responsivo de 16 tecnologias com ícones SVG inline
+  - [x] Agrupamento por 5 categorias (Frontend 4, Backend 4, IA 6, Automação 1, Infra 1)
+  - [x] Tabs de filtro dinâmico (Todas + cada categoria)
+  - [x] Hover effects: accent line animada (400ms) + glow rgba(202,255,51,0.12) + ícone em chartreuse
+  - [x] Descrição da tecnologia aparece ao hover
+  - [x] Scroll reveal com stagger 50ms entre cards
+  - [x] Grid responsivo: auto-fill desktop → 2 cols tablet → 1 col mobile
+- [x] Criar `src/components/sections/SocialProof.tsx` (310 linhas)
+  - [x] 4 métricas counters animadas: +20 empresas, +50 automações, +300 leads, 24/7 infraestrutura
+  - [x] Valores em chartreuse #CAFF33, labels em IBM Plex Mono UPPERCASE
+  - [x] Marquee horizontal CSS @keyframes (30s linear infinite, sem bibliotecas)
+  - [x] Logos em grayscale, hover colorido (chartreuse)
+  - [x] Pausa automática no hover via animation-play-state
+  - [x] 12 clientes/parceiros com initials avatars e sector info
+  - [x] Responsividade: 4 cols → 2 → 1
+- [x] Criar `src/types/tech-stack.ts` — interfaces TypeScript
+  - [x] `TechItemType`: id, name, category, description
+  - [x] `TechCategory` union type: frontend | backend | ia | automacao | infra
+  - [x] `ClientType`: id, name, initials, sector
+- [x] Criar `src/data/tech-stack.ts` (108 linhas)
+  - [x] 16 tecnologias com descrição operacional
+  - [x] 5 categorias com labels
+  - [x] Padrão: id, name, category, description
+- [x] Criar `src/data/clients.ts` (76 linhas)
+  - [x] 12 clientes/parceiros institucionais
+  - [x] Nomes realistas: Meridian Capital, Orbis Tech, VoxFlow AI, etc.
+  - [x] Setor de atuação (Fintech, SaaS, Automação, Data, etc.)
+- [x] Integração em `src/app/page.tsx`
+  - [x] Importação de TechStack e SocialProof
+  - [x] Renderização em sequência (M6)
+- [x] Design system integral
+  - [x] Tipografia: Syne + DM Sans + IBM Plex Mono
+  - [x] Cores: accent #CAFF33, surface #141416, bg #0c0c0e, text hierarchy
+  - [x] Spacing: 8px base (spacing.unit)
+  - [x] Radius: máximo 12px (radius.lg)
+  - [x] Transitions: 200ms normal, 400ms accentLine, 600ms reveal
+- [x] Funcionalidades
+  - [x] Filtro por categoria (estado + efeito)
+  - [x] Hover effects elegantes
+  - [x] Marquee CSS infinito seamless (width: 200%)
+  - [x] Scroll reveal com IntersectionObserver
+  - [x] Stagger 50ms entre cards
+- [x] Responsividade completa
+  - [x] Desktop: grids fluidos (auto-fill, repeat)
+  - [x] Tablet: Tailwind max-lg classes
+  - [x] Mobile: Tailwind max-sm classes
+  - [x] Font sizes dinâmicos com clamp()
+- [x] Acessibilidade
+  - [x] Semântica <section> tags
+  - [x] Labels em UPPERCASE (mono style)
+  - [x] Contraste de cores legível
+  - [x] Descrições acessíveis
+- [x] Testes validados (94.6% taxa de sucesso)
+  - [x] 19/19 presença de elementos
+  - [x] 13/13 funcionalidade
+  - [x] 8/8 acessibilidade
+  - [x] 7/8 responsividade
+  - [x] 14/14 design system
+  - [x] Build production: 115kB First Load JS
 
-**Commit final:** `feat: tech stack e social proof — autoridade técnica e clientes`
+**Commits:**
+- `feat: tech stack e social proof — autoridade técnica e validação institucional (M6)` (a1e52d2)
+
+**PR #5:** ✅ Merged to main
+
+**Tecnologias implementadas (16 total):**
+- Frontend (4): Next.js, React, TypeScript, Tailwind CSS
+- Backend (4): Node.js, PostgreSQL, Supabase, Stripe
+- IA (6): Claude API, OpenAI, Perplexity, Canva, OpenClaw, Cursor *(últimas 4 adicionadas)*
+- Automação (1): N8N
+- Infra (1): Vercel
+
+**Clientes (12 total):** Meridian Capital, Orbis Tech, VoxFlow AI, Nexus Analytics, Apex Systems, Prism Labs, Velocity Commerce, Quantum Networks, Zenith Advisory, Pinnacle AI, Horizon Digital, Sentinel Security
 
 ---
 
@@ -248,79 +310,62 @@
 
 ---
 
-## M8 — Formulário de Contato + Resend
+## M8 — PipeFlow Integration
 
-**Branch:** `feat/contact-resend`
+**Branch:** `feat/pipeflow-integration`
 
-**Objetivo:** Implementar captação de leads com formulário funcional integrado ao Resend para envio de e-mails.
+**Objetivo:** Substituir os TODOs do route handler de contato por integração real com o PipeFlow CRM via Bearer token. Nexus não armazena leads localmente.
 
 ### Entregas
 
-- [ ] Instalar e configurar `resend` SDK
-- [ ] Criar `src/app/api/contact/route.ts` — Route Handler POST
-- [ ] Criar `src/lib/resend/email-templates.ts` — template HTML do e-mail de notificação
-- [ ] Atualizar `src/components/sections/CTASection.tsx` com formulário funcional
-  - [ ] Validação client-side com estado React
-  - [ ] Loading state no botão durante envio
-  - [ ] Feedback de sucesso/erro inline
-- [ ] Configurar variável `RESEND_API_KEY` no `.env.local`
-- [ ] Criar `src/types/contact.ts` — interface `ContactFormData`
-- [ ] Testar envio de e-mail end-to-end
+- [ ] Atualizar `src/app/api/contact/route.ts`
+  - [ ] Ler `PIPEFLOW_API_URL` e `PIPEFLOW_INGEST_TOKEN` do ambiente
+  - [ ] Encaminhar payload para `POST /api/leads/ingest` do PipeFlow com `Authorization: Bearer`
+  - [ ] Mapear 402 do PipeFlow (limite de plano) para 503 — não expor detalhes de billing ao visitante
+  - [ ] Remover `console.log` e TODOs de Resend/Supabase
+- [ ] Atualizar `.env.example` — substituir vars Supabase/Resend por `PIPEFLOW_API_URL` e `PIPEFLOW_INGEST_TOKEN`
+- [ ] Preencher `.env.local` com URL e token reais do PipeFlow
+- [ ] Atualizar `src/data/projects-mock.ts` — `longDescription` do card PipeFlow (id: `"2"`) com disclaimer oficial
+- [ ] Remover diretórios vazios: `src/lib/supabase/`, `src/lib/resend/`, `prisma/` (apenas `.gitkeep`)
+- [ ] Testar envio end-to-end: formulário → `/api/contact` → PipeFlow → lead aparece no CRM
+- [ ] Testar erros: token inválido (502), env vars ausentes (503), payload vazio (400)
 
-**Commit final:** `feat: formulário de contato integrado ao Resend`
+**Commit final:** `feat: pipeflow integration — lead forwarding via bearer token`
 
 ---
 
-## M9 — Supabase + Dados Dinâmicos
+## M9 — LLM Diagnostic Chat Widget
 
-**Branch:** `feat/supabase-integration`
+**Branch:** `feat/chat-widget`
 
-**Objetivo:** Conectar a plataforma ao Supabase para tornar projetos e feed tecnológico administráveis via banco de dados.
-
-### Entregas
-
-- [ ] Instalar `@supabase/supabase-js` e `@supabase/ssr`
-- [ ] Criar `src/lib/supabase/client.ts` — browser client
-- [ ] Criar `src/lib/supabase/server.ts` — server client (App Router)
-- [ ] Criar migration: tabela `projects` (id, title, description, category, stack, featured, created_at)
-- [ ] Criar migration: tabela `tech_feed` (id, title, excerpt, category, url, published_at)
-- [ ] Criar migration: tabela `leads` (id, name, email, company, message, created_at)
-- [ ] Atualizar `ProjectShowcase` para buscar projetos do Supabase (Server Component)
-- [ ] Atualizar `TechFeed` para buscar artigos do Supabase (Server Component)
-- [ ] Atualizar `contact/route.ts` para salvar leads na tabela `leads`
-- [ ] Configurar variáveis Supabase no `.env.local`
-- [ ] Popular tabelas com dados iniciais via Supabase dashboard
-
-**Commit final:** `feat: integração Supabase — projetos, feed e leads dinâmicos`
-
----
-
-## M10 — Chatbot Widget
-
-**Branch:** `feat/chatbot-widget`
-
-**Objetivo:** Implementar widget de chat institucional com respostas pré-programadas e estrutura pronta para IA.
+**Objetivo:** Widget de chat flutuante com diagnóstico por IA. Conversa com o visitante em até 5 turnos, identifica a dor principal e encaminha o lead ao PipeFlow via `/api/contact`.
 
 ### Entregas
 
+- [ ] Criar `src/app/api/chat/route.ts`
+  - [ ] Aceitar `{ messages: { role, content }[] }` — stateless, histórico vive no cliente
+  - [ ] Usar `claude-haiku-4-5-20251001` via `@anthropic-ai/sdk` (instalar: `npm install @anthropic-ai/sdk`)
+  - [ ] System prompt com fluxo estruturado: saudação → identificar dor → resumir → sugerir solução → solicitar nome/e-mail
+  - [ ] Retornar `{ message: string }` — sem persistência server-side
 - [ ] Criar `src/components/layout/ChatWidget.tsx`
-  - [ ] Botão flutuante (bottom-right) com ícone e badge de notificação
-  - [ ] Janela de chat com header (logo Nexus + status "Online")
-  - [ ] Área de mensagens com scroll
-  - [ ] Input + botão de envio
-  - [ ] Animação de abertura/fechamento suave
-- [ ] Criar `src/lib/chatbot/responses.ts` — respostas pré-definidas por intenção
-- [ ] Implementar lógica de matching por palavras-chave (client-side)
-- [ ] Typing indicator animado antes da resposta
-- [ ] Salvar histórico de sessão no `sessionStorage`
-- [ ] Estrutura de API pronta em `src/app/api/chat/route.ts` (stub para IA futura)
-- [ ] Responsividade: widget adaptado para mobile
+  - [ ] Botão flutuante bottom-right (56×56px, `bg-accent`, z-50)
+  - [ ] Painel de chat com header "Nexus AI" + status "Online"
+  - [ ] Animação de abertura (300ms, transform + opacity da corner)
+  - [ ] Typing indicator (3 pontos pulsantes enquanto aguarda resposta)
+  - [ ] Fase `collecting`: formulário inline nome + e-mail após LLM solicitar contato
+  - [ ] Submit → `POST /api/contact` → mensagem de confirmação
+  - [ ] `sessionStorage` para persistir conversa na mesma sessão
+  - [ ] Responsividade: fullwidth mobile (< 640px), `max-w-sm` desktop
+  - [ ] Design system: sem glassmorphism, sem `border-radius > 12px`, fonte DM Sans/IBM Plex Mono
+- [ ] Registrar `<ChatWidget />` em `src/app/layout.tsx` após `<Footer />`
+- [ ] Adicionar `ANTHROPIC_API_KEY` ao `.env.local`
+- [ ] Testar fluxo completo: 5 turnos → coleta nome/e-mail → lead em PipeFlow
 
-**Commit final:** `feat: chatbot widget — UI funcional com respostas institucionais`
+**Commit final:** `feat: llm chat widget — diagnóstico conversacional com encaminhamento para PipeFlow`
 
 ---
 
-## M11 — SEO + Performance
+## M10 — SEO + Performance
 
 **Branch:** `feat/seo-performance`
 
@@ -328,22 +373,20 @@
 
 ### Entregas
 
-- [ ] Configurar `src/app/layout.tsx` com metadata completa (title, description, keywords, authors)
 - [ ] Criar `src/app/opengraph-image.tsx` — OG image dinâmica com Next.js
 - [ ] Criar `src/app/sitemap.ts` — sitemap dinâmico
 - [ ] Criar `src/app/robots.ts` — robots.txt
 - [ ] Otimizar todas as imagens com `next/image` (lazy loading, sizes, priority no Hero)
 - [ ] Auditar e eliminar Client Components desnecessários
 - [ ] Revisar Core Web Vitals: LCP, CLS, FID
-- [ ] Adicionar `loading="eager"` no hero image
 - [ ] Configurar `next.config.ts` com headers de segurança (CSP, X-Frame-Options)
 - [ ] Rodar Lighthouse e atingir score ≥ 90 em Performance e SEO
 
-**Commit final:** `feat: SEO e performance — metadata, OG, sitemap, Lighthouse ≥ 90`
+**Commit final:** `feat: SEO e performance — OG, sitemap, Lighthouse ≥ 90`
 
 ---
 
-## M12 — Deploy Vercel
+## M11 — Deploy Vercel
 
 **Branch:** `feat/deploy`
 
@@ -352,15 +395,14 @@
 ### Entregas
 
 - [ ] Criar projeto na Vercel vinculado ao repositório
-- [ ] Configurar todas as variáveis de ambiente no painel Vercel (Production + Preview)
+- [ ] Configurar variáveis de ambiente no painel Vercel (Production + Preview): `PIPEFLOW_API_URL`, `PIPEFLOW_INGEST_TOKEN`, `ANTHROPIC_API_KEY`
 - [ ] Verificar build de produção local com `npm run build`
 - [ ] Corrigir eventuais erros de build (tipos, imports, etc.)
 - [ ] Deploy inicial para Preview — validar todas as seções
 - [ ] Configurar domínio customizado (se disponível)
-- [ ] Ativar Vercel Analytics
-- [ ] Configurar Vercel Speed Insights
-- [ ] Validar formulário de contato em produção (Resend)
-- [ ] Validar queries Supabase em produção
+- [ ] Ativar Vercel Analytics + Speed Insights
+- [ ] Validar formulário de contato em produção (lead aparece no PipeFlow)
+- [ ] Validar Chat Widget em produção (fluxo completo LLM → PipeFlow)
 - [ ] Deploy final para Production
 - [ ] Smoke test completo em produção (todas as seções, formulário, chatbot)
 
@@ -376,14 +418,13 @@
 | M2 | Layout Base | `feat/layout-base` | ✅ | P0 |
 | M3 | Hero + CTA | `setup/foundation` (merged) | ✅ | P0 |
 | M4 | Dashboard Demo | `feat/dashboard-demo` (merged) | ✅ | P0 |
-| M5 | Project Showcase | `feat/project-showcase` | ✅ | P0 |
-| M6 | Tech Stack + Social Proof | `feat/tech-social` | P1 |
-| M7 | Services + Tech Feed | `feat/services-feed` | P1 |
-| M8 | Formulário + Resend | `feat/contact-resend` | P1 |
-| M9 | Supabase + Dados Dinâmicos | `feat/supabase-integration` | P1 |
-| M10 | Chatbot Widget | `feat/chatbot-widget` | P2 |
-| M11 | SEO + Performance | `feat/seo-performance` | P1 |
-| M12 | Deploy Vercel | `feat/deploy` | P0 |
+| M5 | Project Showcase | `feat/project-showcase` (merged PR #4) | ✅ | P0 |
+| M6 | Tech Stack + Social Proof | `feat/tech-social` (merged PR #5) | ✅ | P0 |
+| M7 | Services + Tech Feed | `feat/services-feed` | — | P1 |
+| M8 | PipeFlow Integration | `feat/pipeflow-integration` | — | P1 |
+| M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` | — | P2 |
+| M10 | SEO + Performance | `feat/seo-performance` | — | P1 |
+| M11 | Deploy Vercel | `feat/deploy` | — | P0 |
 
 ---
 
