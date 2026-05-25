@@ -2,6 +2,8 @@ import { Hero } from "@/components/sections/Hero";
 import { CTASection } from "@/components/sections/CTASection";
 import { DashboardDemo } from "@/components/sections/DashboardDemo";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
+import { TechStack } from "@/components/sections/TechStack";
+import { SocialProof } from "@/components/sections/SocialProof";
 import { projectsMock } from "@/data/projects-mock";
 
 export default function Home() {
@@ -19,7 +21,8 @@ export default function Home() {
       </section>
 
       {/* M6 — Tech Stack + Social Proof */}
-      <section id="tecnologias" aria-label="Tecnologias"></section>
+      <TechStack />
+      <SocialProof />
 
       {/* M7 — Services + Tech Feed */}
       <section id="solucoes" aria-label="Soluções"></section>
