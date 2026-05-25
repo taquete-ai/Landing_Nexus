@@ -286,8 +286,8 @@
 
 ## M7 — Services + Tech Feed ✅
 
-**Branch:** `feat/services-feed` (commit `dc55e97`)
-**Status:** Concluído — commit `dc55e97`
+**Branch:** `feat/services-feed` (merged PR #6 → main via commit a285514)
+**Status:** ✅ Concluído e mergeado em main
 
 **Objetivo:** Apresentar os serviços da Nexus e criar seção de inteligência tecnológica contínua. Transformar landing em ecossistema tecnológico vivo que gera retorno recorrente.
 
@@ -464,7 +464,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 | M4 | Dashboard Demo | `feat/dashboard-demo` (merged) | ✅ | P0 |
 | M5 | Project Showcase | `feat/project-showcase` (merged PR #4) | ✅ | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` (merged PR #5) | ✅ | P0 |
-| M7 | Services + Tech Feed | `feat/services-feed` (commit dc55e97) | ✅ | P1 |
+| M7 | Services + Tech Feed | `feat/services-feed` (merged PR #6) | ✅ | P1 |
 | M8 | PipeFlow Integration | `feat/pipeflow-integration` | — | P1 |
 | M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` | — | P2 |
 | M10 | SEO + Performance | `feat/seo-performance` | — | P1 |
