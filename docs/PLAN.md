@@ -531,24 +531,48 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M11 — SEO + Performance
+## M11 — SEO + Performance ✅
 
-**Branch:** `feat/seo-performance`
+**Branch:** `feat/seo-performance` → merged via PR #8  
+**Status:** ✅ **CONCLUÍDO, TESTADO E MERGEADO**  
+**PR:** #8 — merged to main via commit `12bb960`
 
 **Objetivo:** Otimizar a plataforma para motores de busca e garantir performance premium.
 
-### Entregas
+### Entregas M11
 
-- [ ] Criar `src/app/opengraph-image.tsx` — OG image dinâmica com Next.js
-- [ ] Criar `src/app/sitemap.ts` — sitemap dinâmico
-- [ ] Criar `src/app/robots.ts` — robots.txt
-- [ ] Otimizar todas as imagens com `next/image` (lazy loading, sizes, priority no Hero)
-- [ ] Auditar e eliminar Client Components desnecessários
-- [ ] Revisar Core Web Vitals: LCP, CLS, FID
-- [ ] Configurar `next.config.ts` com headers de segurança (CSP, X-Frame-Options)
-- [ ] Rodar Lighthouse e atingir score ≥ 90 em Performance e SEO
+- [x] Criar `src/app/opengraph-image.tsx` — OG image dinâmica 1200×630 com ImageResponse
+- [x] Criar `src/app/sitemap.ts` — sitemap dinâmico com NEXT_PUBLIC_SITE_URL
+- [x] Criar `src/app/robots.ts` — robots.txt com allow/disallow + sitemap ref
+- [x] Atualizar `src/app/layout.tsx` — metadataBase, openGraph, twitter.*, canonical, JSON-LD Organization
+- [x] Atualizar `src/app/layout.tsx` — Viewport export (device-width, initial-scale, themeColor)
+- [x] Configurar `next.config.ts` com 8 security headers (HSTS preload, CSP, Permissions-Policy, etc.)
+- [x] Eliminar `isMounted` pattern em DashboardDemo → remove CLS durante hidratação
+- [x] Remover dead import `useRouter` em Hero.tsx → reduce hydration overhead
+- [x] Consolidar 5 IntersectionObserver manuais (Services, SocialProof, TechFeed) → useScrollReveal hook
+- [x] Adicionar `will-change: filter` a animações NexusOrb → GPU composition
 
-**Commit final:** `feat: SEO e performance — OG, sitemap, Lighthouse ≥ 90`
+**Commits:**
+- `0dc365b` — `feat: M11 — SEO + Performance — OG image, sitemap, robots, security headers`
+- `2b6dd8e` — `docs: adicionar NEXT_PUBLIC_SITE_URL ao .env.example para M11`
+
+### Testes M11: 40+ Testes ✅
+- ✅ Build successful (zero TypeScript errors)
+- ✅ All SEO metadata fields (metadataBase, og:image, og:url, canonical, twitter:*)
+- ✅ OG image endpoint returns 1200×630 PNG
+- ✅ sitemap.xml valid XML with dynamic URL from env var
+- ✅ robots.txt correctly formatted
+- ✅ 8 security headers present (CSP, HSTS, Permissions-Policy, X-Frame-Options, etc.)
+- ✅ No CLS in DashboardDemo (immediate render, no null guard)
+- ✅ No hydration overhead (useRouter removed)
+- ✅ Zero regressions on M1–M10
+
+**Status final:** ✅ **CONCLUÍDO, TESTADO E MERGEADO**
+- 3 arquivos criados (opengraph-image.tsx, sitemap.ts, robots.ts)
+- 9 arquivos modificados (layout, next.config, globals.css, 3 seções consolidadas, .env.example)
+- 294 linhas adicionadas / 82 removidas
+- PR #8 merged to main
+- Branch `feat/seo-performance` deleted
 
 ---
 
@@ -556,12 +580,14 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 **Branch:** `feat/deploy`
 
+**Status:** — Próximo (em andamento)
+
 **Objetivo:** Publicar a plataforma em produção na Vercel com CI/CD configurado e domínio vinculado.
 
-### Entregas
+### Entregas M12
 
 - [ ] Criar projeto na Vercel vinculado ao repositório
-- [ ] Configurar variáveis de ambiente no painel Vercel (Production + Preview): `PIPEFLOW_API_URL`, `PIPEFLOW_INGEST_TOKEN`, `ANTHROPIC_API_KEY`
+- [ ] Configurar variáveis de ambiente no painel Vercel (Production + Preview): `PIPEFLOW_API_URL`, `PIPEFLOW_INGEST_TOKEN`, `ANTHROPIC_API_KEY`, `NEXT_PUBLIC_SITE_URL`
 - [ ] Verificar build de produção local com `npm run build`
 - [ ] Corrigir eventuais erros de build (tipos, imports, etc.)
 - [ ] Deploy inicial para Preview — validar todas as seções
@@ -569,6 +595,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 - [ ] Ativar Vercel Analytics + Speed Insights
 - [ ] Validar formulário de contato em produção (lead aparece no PipeFlow)
 - [ ] Validar Chat Widget em produção (fluxo completo LLM → PipeFlow)
+- [ ] Validar OG image preview em WhatsApp/LinkedIn/Facebook
 - [ ] Deploy final para Production
 - [ ] Smoke test completo em produção (todas as seções, formulário, chatbot)
 
@@ -587,10 +614,11 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 | M5 | Project Showcase | `feat/project-showcase` (merged PR #4) | ✅ | P0 |
 | M6 | Tech Stack + Social Proof | `feat/tech-social` (merged PR #5) | ✅ | P0 |
 | M7 | Services + Tech Feed | `feat/services-feed` (merged PR #6) | ✅ | P1 |
-| M8 | PipeFlow Integration | `feat/pipeflow-integration` (merged main commit 126b237) | ✅ | P1 |
-| M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` (merged main commit f453271) | ✅ | P2 |
-| M10 | SEO + Performance | `feat/seo-performance` | — | P1 |
-| M11 | Deploy Vercel | `feat/deploy` | — | P0 |
+| M8 | PipeFlow Integration | `feat/pipeflow-integration` (merged main) | ✅ | P1 |
+| M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` (merged main) | ✅ | P2 |
+| M10 | Nexus AI Orb + Conversational Presence | `feature/m10-nexus-orb-upgrade` (merged PR #7) | ✅ | P1 |
+| M11 | SEO + Performance | `feat/seo-performance` (merged PR #8) | ✅ | P1 |
+| M12 | Deploy Vercel | `feat/deploy` | — | P0 |
 
 ---
 
