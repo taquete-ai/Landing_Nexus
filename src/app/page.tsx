@@ -23,8 +23,10 @@ export default function Home() {
       </section>
 
       {/* M6 — Tech Stack + Social Proof */}
-      <TechStack />
-      <SocialProof />
+      <section id="tecnologias" aria-label="Tecnologias">
+        <TechStack />
+        <SocialProof />
+      </section>
 
       {/* M7 — Services + Tech Feed */}
       <section id="solucoes" aria-label="Soluções">

@@ -9,6 +9,7 @@ export function CTASection() {
     name: "",
     email: "",
     company: "",
+    whatsapp: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState<{
@@ -38,7 +39,7 @@ export function CTASection() {
           type: "success",
           message: "Mensagem enviada com sucesso! Entraremos em contato em breve.",
         });
-        setFormState({ name: "", email: "", company: "" });
+        setFormState({ name: "", email: "", company: "", whatsapp: "" });
       } else {
         setFeedback({
           type: "error",
@@ -160,6 +161,31 @@ export function CTASection() {
               placeholder="Empresa"
               value={formState.company}
               onChange={handleChange}
+              className="w-full px-4 py-3 rounded-md transition-all duration-200 font-body focus:outline-none"
+              style={{
+                backgroundColor: "var(--color-surface)",
+                borderColor: "var(--color-border)",
+                borderWidth: "1px",
+                color: "var(--color-text)",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "var(--color-accent)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--color-border)";
+              }}
+            />
+          </div>
+
+          {/* WhatsApp */}
+          <div>
+            <input
+              type="tel"
+              name="whatsapp"
+              placeholder="WhatsApp"
+              value={formState.whatsapp}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-3 rounded-md transition-all duration-200 font-body focus:outline-none"
               style={{
                 backgroundColor: "var(--color-surface)",
