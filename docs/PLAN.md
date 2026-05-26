@@ -403,34 +403,64 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M9 — LLM Diagnostic Chat Widget
+## M9 — LLM Diagnostic Chat Widget ✅
 
-**Branch:** `feat/chat-widget`
+**Branch:** `feat/chat-widget` (merged to main via commit f453271)  
+**Status:** ✅ Concluído, testado (12/12 E2E ✅) e mergeado em main
 
 **Objetivo:** Widget de chat flutuante com diagnóstico por IA. Conversa com o visitante em até 5 turnos, identifica a dor principal e encaminha o lead ao PipeFlow via `/api/contact`.
 
-### Entregas
+### Entregas ✅
 
-- [ ] Criar `src/app/api/chat/route.ts`
-  - [ ] Aceitar `{ messages: { role, content }[] }` — stateless, histórico vive no cliente
-  - [ ] Usar `claude-haiku-4-5-20251001` via `@anthropic-ai/sdk` (instalar: `npm install @anthropic-ai/sdk`)
-  - [ ] System prompt com fluxo estruturado: saudação → identificar dor → resumir → sugerir solução → solicitar nome/e-mail
-  - [ ] Retornar `{ message: string }` — sem persistência server-side
-- [ ] Criar `src/components/layout/ChatWidget.tsx`
-  - [ ] Botão flutuante bottom-right (56×56px, `bg-accent`, z-50)
-  - [ ] Painel de chat com header "Nexus AI" + status "Online"
-  - [ ] Animação de abertura (300ms, transform + opacity da corner)
-  - [ ] Typing indicator (3 pontos pulsantes enquanto aguarda resposta)
-  - [ ] Fase `collecting`: formulário inline nome + e-mail após LLM solicitar contato
-  - [ ] Submit → `POST /api/contact` → mensagem de confirmação
-  - [ ] `sessionStorage` para persistir conversa na mesma sessão
-  - [ ] Responsividade: fullwidth mobile (< 640px), `max-w-sm` desktop
-  - [ ] Design system: sem glassmorphism, sem `border-radius > 12px`, fonte DM Sans/IBM Plex Mono
-- [ ] Registrar `<ChatWidget />` em `src/app/layout.tsx` após `<Footer />`
-- [ ] Adicionar `ANTHROPIC_API_KEY` ao `.env.local`
-- [ ] Testar fluxo completo: 5 turnos → coleta nome/e-mail → lead em PipeFlow
+- [x] Criar `src/app/api/chat/route.ts` (98 linhas)
+  - [x] Aceitar `{ messages: { role, content }[] }` — stateless, histórico vive no cliente
+  - [x] Usar `claude-haiku-4-5-20251001` via `@anthropic-ai/sdk`
+  - [x] System prompt com fluxo estruturado: 5 turnos (saudação → clarificação 1 → clarificação 2 → resumo+solução → coleta)
+  - [x] Retornar `{ message: string, isCollectionPhase: boolean }` — sem persistência server-side
+- [x] Criar `src/components/layout/ChatWidget.tsx` (304 linhas)
+  - [x] Botão flutuante bottom-right (56×56px, `bg-accent` #CAFF33, z-50)
+  - [x] Painel de chat com header "Nexus AI" + status "Online" + indicador pulsante
+  - [x] Animação de abertura (300ms fade + slide)
+  - [x] Typing indicator (3 pontos pulsantes enquanto aguarda resposta)
+  - [x] Fase `collecting`: formulário inline nome + e-mail + empresa após Turn 5
+  - [x] Submit → `POST /api/contact` → mensagem de sucesso com setTimeout reset
+  - [x] `sessionStorage` para persistir conversa na mesma sessão
+  - [x] Responsividade: fullwidth mobile (<640px), `max-w-sm` desktop
+  - [x] Design system: sem glassmorphism, radius ≤12px, Syne+DM Sans+IBM Plex Mono
+- [x] Criar `src/types/chat.ts` (37 linhas)
+  - [x] `ChatMessage`, `ChatRequest`, `ChatResponse`, `LeadCollectionForm`, `LeadPayload`, `RateLimitState`
+- [x] Criar `src/lib/chat.ts` (186 linhas)
+  - [x] `checkRateLimit()` — localStorage: 20 msgs/sessão, 1s throttle, 30min block
+  - [x] `sendChatMessage()`, `extractLeadData()`, `submitLeadToPipeFlow()`
+- [x] Registrar `<ChatWidget />` em `src/app/layout.tsx` após `<Footer />`
+- [x] Instalar `@anthropic-ai/sdk` (npm install)
+- [x] Adicionar `ANTHROPIC_API_KEY` ao `.env.local`
+- [x] Testar fluxo completo: 5 turnos → coleta nome/e-mail → lead em PipeFlow ✅
 
-**Commit final:** `feat: llm chat widget — diagnóstico conversacional com encaminhamento para PipeFlow`
+**Testes E2E:** 12/12 aprovados ✅
+- Turn 1 Greeting: ✅
+- Turn 2 Clarification 1: ✅
+- Turn 3 Clarification 2: ✅
+- Turn 4 Summary+Solution: ✅
+- Turn 5 Collection: ✅
+- Rate limiting (20 msgs): ✅
+- sessionStorage persistence: ✅
+- Design system compliance: ✅
+- Error handling: ✅
+- Lead → PipeFlow integration: ✅
+- Coerência/sem alucinação: ✅
+- Load/latência (~1.8s): ✅
+
+**Commits:**
+- `464177a` — `feat: llm diagnostic chat widget — 5-turn AI consultation (M9)`
+- `f453271` — `docs: M9 E2E test results — todos os testes aprovados ✅`
+
+**Status final:** ✅ **CONCLUÍDO, TESTADO E MERGEADO**
+- Zero erros TypeScript
+- Build: 118kB First Load JS
+- Chat funcional, sem alucinações
+- Integração PipeFlow confirmada
+- Design Nexus 100%
 
 ---
 
@@ -491,7 +521,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 | M6 | Tech Stack + Social Proof | `feat/tech-social` (merged PR #5) | ✅ | P0 |
 | M7 | Services + Tech Feed | `feat/services-feed` (merged PR #6) | ✅ | P1 |
 | M8 | PipeFlow Integration | `feat/pipeflow-integration` (merged main commit 126b237) | ✅ | P1 |
-| M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` | — | P2 |
+| M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` (merged main commit f453271) | ✅ | P2 |
 | M10 | SEO + Performance | `feat/seo-performance` | — | P1 |
 | M11 | Deploy Vercel | `feat/deploy` | — | P0 |
 

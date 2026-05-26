@@ -21,17 +21,14 @@ export interface EnrichedLead extends BasicLead {
   metadata?: Record<string, unknown>; // Dados adicionais (timestamps, origem URL, etc.)
 }
 
-/** Payload enviado para PipeFlow API */
+/** Payload enviado para PipeFlow API (alinhado com schema PipeFlow) */
 export interface PipeFlowLeadPayload {
   name: string;
-  email: string;
+  email?: string;
+  phone?: string;
   company?: string;
-  source?: string;
-  conversationSummary?: string;
-  identifiedPain?: string;
-  suggestedSolution?: string;
-  interestLevel?: string;
-  metadata?: Record<string, unknown>;
+  position?: string;
+  notes?: string;
 }
 
 /** Resposta da API PipeFlow */

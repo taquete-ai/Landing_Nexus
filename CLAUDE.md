@@ -148,7 +148,7 @@ Fires once (unobserves após primeira intersecção). Stagger manual com `transi
 | CTA Principal | `components/sections/CTASection.tsx` | ✅ |
 | Tech Stack + Social Proof | `components/sections/TechStack.tsx` / `SocialProof.tsx` | M6 |
 | Serviços + Feed Tecnológico | `components/sections/Services.tsx` / `TechFeed.tsx` | M7 |
-| Chat Widget LLM | `components/layout/ChatWidget.tsx` | M9 |
+| Chat Widget LLM | `components/layout/ChatWidget.tsx` | ✅ (M9) |
 | Footer | `components/layout/Footer.tsx` | ✅ |
 
 ---
