@@ -228,15 +228,26 @@ export function ChatWidget() {
               </form>
             ) : (
               <form onSubmit={handleSendMessage} className="flex gap-2">
-                <input
+                <textarea
                   ref={inputRef}
-                  type="text"
                   autoFocus
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    // Auto-resize: ajusta altura conforme digita
+                    e.target.style.height = "auto";
+                    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage(e as unknown as React.FormEvent);
+                    }
+                  }}
                   placeholder="Digite sua resposta..."
                   disabled={isLoading}
-                  className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors disabled:opacity-50"
+                  rows={1}
+                  className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors disabled:opacity-50 resize-none overflow-hidden"
                 />
                 <button
                   type="submit"
