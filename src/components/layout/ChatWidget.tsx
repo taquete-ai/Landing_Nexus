@@ -1,11 +1,18 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, X, MessageCircle } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { checkRateLimit, sendChatMessage, extractLeadData, submitLeadToPipeFlow } from "@/lib/chat";
 import type { ChatMessage, LeadCollectionForm } from "@/types/chat";
+import type { OrbState, SmartEvent } from "@/types/orb";
+import { NexusOrb } from "./NexusOrb";
+import { ThoughtBubble } from "./ThoughtBubble";
+import { useSmartAttention } from "@/hooks/useSmartAttention";
+import { createInitialOrbState, transitionOrbState } from "@/lib/orb-state";
+import { selectPromptByEvent } from "@/data/thought-prompts";
 
 export function ChatWidget() {
+  // ─── M9 States (untouched) ──────────────────────────────────
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -20,8 +27,13 @@ export function ChatWidget() {
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+
+  // ─── M10 Orb States ────────────────────────────────────────
+  const [orbState, setOrbState] = useState(createInitialOrbState());
+  const [bubbleMessage, setBubbleMessage] = useState("");
+  const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -47,6 +59,49 @@ export function ChatWidget() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    if (isCollecting) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isCollecting]);
+
+  // ─── M10: Smart Attention System ───────────────────────────
+  useSmartAttention({
+    onEvent: (event: SmartEvent) => {
+      if (isOpen) return; // Não mostrar bubbles se chat está aberto
+
+      // Transicionar para thinking
+      setOrbState((prev) => transitionOrbState(prev, "thinking"));
+
+      // Selecionar frase
+      const prompt = selectPromptByEvent(event);
+      setBubbleMessage(prompt);
+
+      // Mostrar bubble após delay
+      setTimeout(() => {
+        setShowBubble(true);
+        setOrbState((prev) => transitionOrbState(prev, "bubble_show"));
+      }, 50);
+    },
+    enabled: !isOpen, // Desativar quando chat está aberto
+  });
+
+  const handleOrbClick = () => {
+    setShowBubble(false);
+    setOrbState((prev) => transitionOrbState(prev, "chat_open"));
+    setIsOpen(true);
+  };
+
+  const handleCloseBubble = () => {
+    setShowBubble(false);
+    setOrbState((prev) => transitionOrbState(prev, "bubble_hide"));
+  };
+
+  const handleCloseChat = () => {
+    setIsOpen(false);
+    setOrbState((prev) => transitionOrbState(prev, "chat_close"));
+  };
 
   const saveHistory = (msgs: ChatMessage[]) => {
     sessionStorage.setItem("nexus_chat_history", JSON.stringify(msgs));
@@ -125,7 +180,7 @@ export function ChatWidget() {
       email: collectForm.email,
       company: collectForm.company || "",
       whatsapp: collectForm.whatsapp,
-      source: "Nexus Chat Widget",
+      source: "Nexus Chat Widget" as const,
       conversationSummary,
       identifiedPain: "Desafio operacional identificado durante diagnóstico",
       suggestedSolution: "Explorar soluções Nexus personalizadas",
@@ -160,20 +215,28 @@ export function ChatWidget() {
 
   return (
     <div className="fixed bottom-20 right-6 z-50 font-body">
-      {/* Floating Button */}
+      {/* M10: Nexus Orb (visible when chat is closed) */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-14 h-14 rounded-full bg-accent text-bg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
-          aria-label="Abrir chat Nexus"
-        >
-          <MessageCircle size={24} />
-        </button>
+        <>
+          <NexusOrb
+            isThinking={orbState.isThinking}
+            isBubbleVisible={orbState.isBubbleVisible}
+            showLabel={true}
+            onClick={handleOrbClick}
+          />
+          <ThoughtBubble
+            message={bubbleMessage}
+            isVisible={showBubble}
+            onClose={handleCloseBubble}
+          />
+        </>
       )}
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="w-full max-w-sm bg-surface border border-border rounded-xl shadow-2xl flex flex-col-reverse h-96 sm:h-[28rem] animation-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className={`w-full max-w-sm bg-surface border border-border rounded-xl shadow-2xl flex flex-col-reverse transition-all duration-300 animation-in fade-in slide-in-from-bottom-4 ${
+          isCollecting ? "h-[32rem] sm:h-[36rem]" : "h-96 sm:h-[28rem]"
+        }`}>
           {/* Input Area — aparece embaixo (primeiro no JSX com flex-col-reverse) */}
           <div className="border-t border-border p-4 bg-surface">
             {isCollecting ? (
@@ -318,7 +381,7 @@ export function ChatWidget() {
               </div>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleCloseChat}
               className="text-text-secondary hover:text-text transition-colors"
               aria-label="Fechar chat"
             >
