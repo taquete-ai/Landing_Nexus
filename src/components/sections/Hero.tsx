@@ -2,7 +2,6 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 const metrics = [
   { value: "12", label: "Projetos Entregues" },
@@ -12,7 +11,6 @@ const metrics = [
 
 export function Hero() {
   const { ref, isVisible } = useScrollReveal();
-  const router = useRouter();
 
   const handleScrollToProjetos = () => {
     const projetosSection = document.getElementById("projetos");

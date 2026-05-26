@@ -1,35 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { clientsMock } from "@/data/clients";
 import { colors, fontFamily, radius, transitions, spacing } from "@/styles/design-tokens";
 
 export function SocialProof() {
-  const [isVisible, setIsVisible] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  /* Animação de revelação ao scroll */
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observerRef.current.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, []);
+  const { ref, isVisible } = useScrollReveal();
 
   const metrics = [
     { value: "+20", label: "Empresas Atendidas" },
@@ -40,7 +17,7 @@ export function SocialProof() {
 
   return (
     <section
-      ref={sectionRef}
+      ref={ref as React.RefObject<HTMLElement>}
       style={{
         paddingTop: spacing.unit(12),
         paddingBottom: spacing.unit(12),

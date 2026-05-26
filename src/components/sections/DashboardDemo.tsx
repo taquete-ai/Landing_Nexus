@@ -10,14 +10,6 @@ import { ActivityFeed } from "./dashboard/ActivityFeed";
 import { MiniChart } from "./dashboard/MiniChart";
 
 export function DashboardDemo() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
     <section
       id="dashboard"

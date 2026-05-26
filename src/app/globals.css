@@ -185,6 +185,7 @@
   .nexus-orb-idle {
     filter: drop-shadow(0 0 8px #caff33) drop-shadow(0 0 4px rgba(202, 255, 51, 0.4));
     animation: nexus-glow-idle 2s ease-in-out infinite;
+    will-change: filter;
   }
 
   @keyframes nexus-glow-idle {
@@ -200,6 +201,7 @@
   .nexus-orb-thinking {
     filter: drop-shadow(0 0 20px #caff33) drop-shadow(0 0 12px rgba(202, 255, 51, 0.8));
     animation: nexus-glow-thinking 1.2s ease-in-out infinite;
+    will-change: filter;
   }
 
   @keyframes nexus-glow-thinking {

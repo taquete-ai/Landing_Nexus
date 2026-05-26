@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { servicesMock } from "@/data/services-mock";
 import { colors, fontFamily, radius, transitions, spacing } from "@/styles/design-tokens";
 
@@ -71,30 +72,11 @@ const ServiceIcon = ({ icon }: { icon: string }) => {
 };
 
 export function Services() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observerRef.current.observe(sectionRef.current);
-    }
-
-    return () => observerRef.current?.disconnect();
-  }, []);
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section
-      ref={sectionRef}
+      ref={ref as React.RefObject<HTMLElement>}
       style={{
         paddingTop: spacing.unit(12),
         paddingBottom: spacing.unit(12),
