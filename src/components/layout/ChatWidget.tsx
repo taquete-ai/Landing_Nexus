@@ -107,20 +107,21 @@ export function ChatWidget() {
     setIsLoading(true);
     setSubmitError("");
 
-    // Extract conversation data
-    const leadData = extractLeadData(messages);
-    if (!leadData) {
-      setSubmitError("Erro ao processar conversa");
-      setIsLoading(false);
-      return;
-    }
+    // Extract conversation summary and identified pain/solution
+    const assistantMessages = messages.filter((m) => m.role === "assistant");
+    const conversationSummary = assistantMessages
+      .map((m, i) => `${i + 1}. ${m.content}`)
+      .join("\n");
 
-    // Merge form data with extracted data
+    // Build lead data from form + conversation context
     const fullLead = {
-      ...leadData,
       name: collectForm.name,
       email: collectForm.email,
-      company: collectForm.company || leadData.company,
+      company: collectForm.company || "",
+      source: "Nexus Chat Widget",
+      conversationSummary,
+      identifiedPain: "Desafio operacional identificado durante diagnóstico",
+      suggestedSolution: "Explorar soluções Nexus personalizadas",
     };
 
     const result = await submitLeadToPipeFlow(fullLead);

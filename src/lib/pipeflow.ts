@@ -17,6 +17,12 @@ export async function ingestLeadToPipeFlow(
   const apiUrl = process.env.PIPEFLOW_API_URL;
   const token = process.env.PIPEFLOW_INGEST_TOKEN;
 
+  console.log("[PipeFlow] Verificando env vars:", {
+    hasApiUrl: !!apiUrl,
+    hasToken: !!token,
+    apiUrl: apiUrl?.substring(0, 20) + "...",
+  });
+
   // Validação: env vars ausentes
   if (!apiUrl || !token) {
     console.error("[PipeFlow] Env vars ausentes: PIPEFLOW_API_URL e/ou PIPEFLOW_INGEST_TOKEN");
@@ -40,7 +46,7 @@ export async function ingestLeadToPipeFlow(
       const data = await response.json();
       return {
         success: true,
-        leadId: data.leadId,
+        leadId: data.id,
         message: "Lead capturado com sucesso",
       };
     }

@@ -2,7 +2,7 @@ import type { ChatMessage, LeadPayload, RateLimitState } from "@/types/chat";
 
 const RATE_LIMIT_KEY = "nexus_chat_rate_limit";
 const MAX_MESSAGES_PER_SESSION = 20;
-const THROTTLE_MS = 300; // reduzido de 1000 — botão já fica disabled durante loading
+const THROTTLE_MS = 0; // Desabilitado: botão já fica disabled durante loading
 const BLOCK_DURATION_MS = 30 * 60 * 1000; // 30 minutos
 
 export function checkRateLimit(): {

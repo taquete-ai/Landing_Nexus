@@ -6,6 +6,12 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("[API Contact] Env vars check:", {
+      hasPipeFlowUrl: !!process.env.PIPEFLOW_API_URL,
+      hasPipeFlowToken: !!process.env.PIPEFLOW_INGEST_TOKEN,
+      apiUrl: process.env.PIPEFLOW_API_URL?.substring(0, 30) + "...",
+    });
+
     const body = await request.json();
     const { name, email, company, source, conversationSummary, identifiedPain, suggestedSolution, interestLevel } = body;
 
@@ -24,21 +30,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Construir payload para PipeFlow
+    // Construir payload para PipeFlow (alinhado com schema esperado)
+    const notes = [
+      `Origem: ${source || "form"}`,
+      conversationSummary ? `Conversa:\n${conversationSummary}` : null,
+      identifiedPain ? `Desafio: ${identifiedPain}` : null,
+      suggestedSolution ? `Solução sugerida: ${suggestedSolution}` : null,
+      interestLevel ? `Nível de interesse: ${interestLevel}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
     const leadPayload: PipeFlowLeadPayload = {
       name: name.trim(),
       email: email.trim().toLowerCase(),
-      company: company?.trim(),
-      source: source || "form",
-      conversationSummary,
-      identifiedPain,
-      suggestedSolution,
-      interestLevel,
-      metadata: {
-        timestamp: new Date().toISOString(),
-        userAgent: request.headers.get("user-agent"),
-        origin: request.headers.get("origin"),
-      },
+      company: company?.trim() || "",
+      notes: notes.substring(0, 2000),
     };
 
     // Enviar para PipeFlow
