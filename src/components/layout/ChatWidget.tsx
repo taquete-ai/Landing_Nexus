@@ -15,10 +15,12 @@ export function ChatWidget() {
     name: "",
     email: "",
     company: "",
+    whatsapp: "",
   });
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -76,6 +78,10 @@ export function ChatWidget() {
     const response = await sendChatMessage(newMessages);
     setIsLoading(false);
 
+    if (!response.error) {
+      inputRef.current?.focus();
+    }
+
     if (response.error) {
       setSubmitError(response.error);
       return;
@@ -99,8 +105,8 @@ export function ChatWidget() {
   const handleSubmitLead = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!collectForm.name || !collectForm.email) {
-      setSubmitError("Nome e e-mail são obrigatórios");
+    if (!collectForm.name || !collectForm.email || !collectForm.whatsapp) {
+      setSubmitError("Nome, e-mail e WhatsApp são obrigatórios");
       return;
     }
 
@@ -118,6 +124,7 @@ export function ChatWidget() {
       name: collectForm.name,
       email: collectForm.email,
       company: collectForm.company || "",
+      whatsapp: collectForm.whatsapp,
       source: "Nexus Chat Widget",
       conversationSummary,
       identifiedPain: "Desafio operacional identificado durante diagnóstico",
@@ -128,15 +135,20 @@ export function ChatWidget() {
     setIsLoading(false);
 
     if (result.success) {
-      setSubmitSuccess(true);
+      const leadName = collectForm.name.split(" ")[0]; // Primeiro nome
+
+      const goodbyeMessage: ChatMessage = {
+        role: "assistant",
+        content: `Perfeito, ${leadName}! ✓ Seus dados foram registrados com sucesso. Em breve, um especialista da Nexus entrará em contato via WhatsApp. Posso ajudá-lo com mais algo?`,
+      };
+
+      const updatedMessages = [...messages, goodbyeMessage];
+      setMessages(updatedMessages);
+      saveHistory(updatedMessages);
+
       setIsCollecting(false);
-      // Clear history after successful submission
-      setTimeout(() => {
-        setMessages([]);
-        setCollectForm({ name: "", email: "", company: "" });
-        setSubmitSuccess(false);
-        sessionStorage.removeItem("nexus_chat_history");
-      }, 3000);
+      setCollectForm({ name: "", email: "", company: "", whatsapp: "" });
+      setInput("");
     } else {
       setSubmitError(result.error || "Erro ao enviar lead");
     }
@@ -161,25 +173,84 @@ export function ChatWidget() {
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="w-full max-w-sm bg-surface border border-border rounded-xl shadow-2xl flex flex-col h-96 sm:h-[28rem] animation-in fade-in slide-in-from-bottom-4 duration-300">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-border">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-positive animate-pulse" />
-              <div>
-                <h3 className="text-sm font-semibold text-text font-display">
-                  NEX
-                </h3>
-                <p className="text-xs text-text-secondary">Online</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-text-secondary hover:text-text transition-colors"
-              aria-label="Fechar chat"
-            >
-              <X size={20} />
-            </button>
+        <div className="w-full max-w-sm bg-surface border border-border rounded-xl shadow-2xl flex flex-col-reverse h-96 sm:h-[28rem] animation-in fade-in slide-in-from-bottom-4 duration-300">
+          {/* Input Area — aparece embaixo (primeiro no JSX com flex-col-reverse) */}
+          <div className="border-t border-border p-4 bg-surface">
+            {isCollecting ? (
+              <form onSubmit={handleSubmitLead} className="space-y-3">
+                <input
+                  type="text"
+                  placeholder="Seu nome *"
+                  value={collectForm.name}
+                  onChange={(e) =>
+                    setCollectForm({ ...collectForm, name: e.target.value })
+                  }
+                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="seu@email.com *"
+                  value={collectForm.email}
+                  onChange={(e) =>
+                    setCollectForm({ ...collectForm, email: e.target.value })
+                  }
+                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Empresa (opcional)"
+                  value={collectForm.company}
+                  onChange={(e) =>
+                    setCollectForm({ ...collectForm, company: e.target.value })
+                  }
+                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
+                />
+                <input
+                  type="tel"
+                  placeholder="WhatsApp *"
+                  value={collectForm.whatsapp}
+                  onChange={(e) =>
+                    setCollectForm({ ...collectForm, whatsapp: e.target.value })
+                  }
+                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
+                />
+                {submitError && (
+                  <p className="text-negative text-xs">{submitError}</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-accent text-bg py-2 rounded-lg font-semibold text-sm hover:bg-opacity-90 transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {isLoading ? "Enviando..." : "Enviar"}
+                  {!isLoading && <Send size={16} />}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleSendMessage} className="flex gap-2">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  autoFocus
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Digite sua resposta..."
+                  disabled={isLoading}
+                  className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !input.trim()}
+                  className="bg-accent text-bg p-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 disabled:opacity-50"
+                  aria-label="Enviar mensagem"
+                >
+                  <Send size={18} />
+                </button>
+              </form>
+            )}
+            {submitError && !isCollecting && (
+              <p className="text-negative text-xs mt-2">{submitError}</p>
+            )}
           </div>
 
           {/* Messages Area */}
@@ -221,86 +292,27 @@ export function ChatWidget() {
               </div>
             )}
 
-            {submitSuccess && (
-              <div className="bg-positive/10 border border-positive/30 rounded-lg p-3">
-                <p className="text-positive text-sm font-semibold">
-                  ✓ Lead capturado com sucesso!
-                </p>
-                <p className="text-text-secondary text-xs mt-1">
-                  Em breve, um especialista da Nexus entrará em contato.
-                </p>
-              </div>
-            )}
-
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
-          <div className="border-t border-border p-4 bg-surface">
-            {isCollecting ? (
-              <form onSubmit={handleSubmitLead} className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Seu nome *"
-                  value={collectForm.name}
-                  onChange={(e) =>
-                    setCollectForm({ ...collectForm, name: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
-                />
-                <input
-                  type="email"
-                  placeholder="seu@email.com *"
-                  value={collectForm.email}
-                  onChange={(e) =>
-                    setCollectForm({ ...collectForm, email: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
-                />
-                <input
-                  type="text"
-                  placeholder="Empresa (opcional)"
-                  value={collectForm.company}
-                  onChange={(e) =>
-                    setCollectForm({ ...collectForm, company: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors"
-                />
-                {submitError && (
-                  <p className="text-negative text-xs">{submitError}</p>
-                )}
-                <button
-                  type="submit"
-                  disabled={isLoading || submitSuccess}
-                  className="w-full bg-accent text-bg py-2 rounded-lg font-semibold text-sm hover:bg-opacity-90 transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
-                >
-                  {isLoading ? "Enviando..." : "Enviar"}
-                  {!isLoading && <Send size={16} />}
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleSendMessage} className="flex gap-2">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Digite sua resposta..."
-                  disabled={isLoading}
-                  className="flex-1 px-3 py-2 bg-bg border border-border rounded-lg text-text text-sm placeholder-text-muted focus:outline-none focus:border-accent transition-colors disabled:opacity-50"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading || !input.trim()}
-                  className="bg-accent text-bg p-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 disabled:opacity-50"
-                  aria-label="Enviar mensagem"
-                >
-                  <Send size={18} />
-                </button>
-              </form>
-            )}
-            {submitError && !isCollecting && (
-              <p className="text-negative text-xs mt-2">{submitError}</p>
-            )}
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-positive animate-pulse" />
+              <div>
+                <h3 className="text-sm font-semibold text-text font-display">
+                  NEX
+                </h3>
+                <p className="text-xs text-text-secondary">Online</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-text-secondary hover:text-text transition-colors"
+              aria-label="Fechar chat"
+            >
+              <X size={20} />
+            </button>
           </div>
         </div>
       )}

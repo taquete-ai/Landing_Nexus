@@ -69,6 +69,11 @@ export function checkRateLimit(): {
   return { allowed: true };
 }
 
+async function simulateTypingDelay(): Promise<void> {
+  const delay = Math.random() * 3000 + 5000; // 5-8 segundos
+  await new Promise(resolve => setTimeout(resolve, delay));
+}
+
 export async function sendChatMessage(
   messages: ChatMessage[]
 ): Promise<{ message: string; error?: string }> {
@@ -85,6 +90,10 @@ export async function sendChatMessage(
     }
 
     const data = await response.json();
+
+    // Simular digitação do NEX (5-8 segundos)
+    await simulateTypingDelay();
+
     return { message: data.message };
   } catch (error) {
     return {

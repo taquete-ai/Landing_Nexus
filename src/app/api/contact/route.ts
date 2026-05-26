@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     });
 
     const body = await request.json();
-    const { name, email, company, source, conversationSummary, identifiedPain, suggestedSolution, interestLevel } = body;
+    const { name, email, company, whatsapp, source, conversationSummary, identifiedPain, suggestedSolution, interestLevel } = body;
 
     // Validação básica
     if (!name || !email) {
@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
     const leadPayload: PipeFlowLeadPayload = {
       name: name.trim(),
       email: email.trim().toLowerCase(),
+      phone: whatsapp?.trim() || "", // PipeFlow sanitiza e adiciona código de país
       company: company?.trim() || "",
       notes: notes.substring(0, 2000),
     };

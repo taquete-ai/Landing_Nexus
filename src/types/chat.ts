@@ -16,7 +16,8 @@ export interface ChatResponse {
 export interface LeadCollectionForm {
   name: string;
   email: string;
-  company?: string;
+  company: string;
+  whatsapp: string;
 }
 
 export interface LeadPayload {
