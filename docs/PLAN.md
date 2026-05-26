@@ -464,7 +464,74 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M10 — SEO + Performance
+## M10 — UX Upgrade: Nexus AI Orb + Smart Conversational Presence ✅
+
+**Branch:** `feature/m10-nexus-orb-upgrade`  
+**Status:** ✅ **CONCLUÍDO, TESTADO, MERGEADO**  
+**PR:** #7 — merged to main via commit `e468835`
+
+**Objetivo:** Transformar o ChatWidget de um chat comum para uma presença operacional inteligente com identidade visual premium.
+
+### Entregas M10
+
+- [x] Criar `src/components/layout/NexusOrb.tsx` — Orb visual minimalista com SVG + glow animations
+- [x] Criar `src/components/layout/ThoughtBubble.tsx` — Sistema de mensagens contextuais (fade in/out automático 5-8s)
+- [x] Criar `src/hooks/useSmartAttention.ts` — Detecção inteligente de 5 eventos:
+  - [x] User Idle (15s) → thought bubble diagnóstica
+  - [x] Scroll Deep (>50%) → mensagem estratégica
+  - [x] Project Card Hover → insight operacional
+  - [x] Back to Top (<200px) → reengajamento
+  - [x] Section Dwell (>10s) → contextual prompt
+- [x] Criar `src/lib/orb-state.ts` — State machine (idle → thinking → bubble_visible → chat_open)
+- [x] Criar `src/data/thought-prompts.ts` — 4 frases aprovadas com seletor contextual
+- [x] Criar `src/types/orb.ts` — Tipos e interfaces para orb system
+- [x] Integrar em ChatWidget.tsx — M10 + M9 100% backward compatible
+- [x] Adicionar animações CSS em globals.css:
+  - [x] breathing (3s scale animation)
+  - [x] glow-idle (2s glow pulsation)
+  - [x] glow-thinking (1.2s intenso)
+- [x] Testar todos eventos Smart Attention — ✅ todos aprovados
+- [x] Testar M9 chat — ✅ zero regressions
+- [x] Mobile responsivity — ✅ 100% funcional
+
+**Commit:** `feat: M10 + M10.1 — Nexus AI Orb Intelligence + NEX AI Identity` (aaa1ebc)
+
+### Entregas M10.1 — NEX AI Identity Upgrade
+
+- [x] Refactor NexusOrb.tsx para layout horizontal: **● NEX AI**
+- [x] Adicionar props: `isBubbleVisible`, `showLabel`
+- [x] Dinâmica de label opacity:
+  - [x] Idle: 100% (visível)
+  - [x] Thinking: 60% (tenue)
+  - [x] Bubble: 80% (moderado)
+- [x] Mobile responsivity: Label escondido (<640px)
+- [x] Atualizar ChatWidget com novos props
+- [x] Testar desktop + mobile — ✅ todos aprovados
+
+**Testes Finais M10 + M10.1:** 12/12 aprovados ✅
+- Desktop orb + label animado: ✅
+- Mobile orb (label hidden): ✅
+- User Idle event (15s): ✅
+- Scroll Deep event (>50%): ✅
+- Project Card Hover: ✅
+- Back to Top event: ✅
+- Section Dwell (>10s): ✅
+- Thought bubble 5-8s auto-dismiss: ✅
+- M9 chat 100% compatible: ✅
+- Label opacity transitions smooth: ✅
+- Zero console errors: ✅
+- Performance 60fps animations: ✅
+
+**Status final:** ✅ **CONCLUÍDO, TESTADO E MERGEADO**
+- 596 linhas de código novo
+- 0 regressions em M9
+- 100% mobile responsive
+- All animations smooth (60fps)
+- PR #7 merged to main
+
+---
+
+## M11 — SEO + Performance
 
 **Branch:** `feat/seo-performance`
 
@@ -485,7 +552,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M11 — Deploy Vercel
+## M12 — Deploy Vercel
 
 **Branch:** `feat/deploy`
 
