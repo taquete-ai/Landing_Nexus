@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { techFeedMock } from "@/data/tech-feed-mock";
 import { colors, fontFamily, radius, transitions, spacing } from "@/styles/design-tokens";
 
@@ -15,26 +16,7 @@ const categoryLabels: Record<string, string> = {
 };
 
 export function TechFeed() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observerRef.current.observe(sectionRef.current);
-    }
-
-    return () => observerRef.current?.disconnect();
-  }, []);
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section
@@ -43,7 +25,7 @@ export function TechFeed() {
         paddingBottom: spacing.unit(12),
         background: colors.bg,
       }}
-      ref={sectionRef}
+      ref={ref as React.RefObject<HTMLElement>}
     >
       <div style={{ maxWidth: "1440px", margin: "0 auto", padding: `0 ${spacing.unit(3)}px` }}>
         {/* Header com Label NEXUS INTEL */}
