@@ -67,8 +67,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@nexuslabsai",
-    creator: "@nexuslabsai",
     title: "Nexus Labs AI Systems",
     description:
       "Ecossistema premium de IA, automação e desenvolvimento de software.",
@@ -102,8 +100,6 @@ export default function RootLayout({
     description:
       "Ecossistema premium de IA, automação e desenvolvimento de software",
     image: `${siteUrl}/opengraph-image`,
-    sameAs: ["https://twitter.com/nexuslabsai"],
-    foundingDate: "2024",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Sales",

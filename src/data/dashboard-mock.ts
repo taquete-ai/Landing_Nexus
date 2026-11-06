@@ -33,7 +33,7 @@ export const dashboardData: DashboardData = {
   activity: [
     {
       id: "1",
-      message: "João Silva converteu lead em oportunidade",
+      message: "Lead de exemplo convertido em oportunidade",
       timestamp: new Date(Date.now() - 2 * 60000),
       priority: "high",
     },

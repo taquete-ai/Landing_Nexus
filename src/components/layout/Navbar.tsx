@@ -1,19 +1,23 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Menu, X } from "lucide-react"
 
 const NAV_LINKS = [
-  { label: "Soluções",    href: "#solucoes" },
-  { label: "Projetos",    href: "#projetos" },
-  { label: "Tecnologias", href: "#tecnologias" },
-  { label: "Contato",     href: "#contato" },
+  { label: "Soluções",    href: "/#solucoes" },
+  { label: "Projetos",    href: "/#projetos" },
+  { label: "Tecnologias", href: "/#tecnologias" },
+  { label: "Parceiros",   href: "/parceiros" },
+  { label: "Contato",     href: "/#contato" },
 ] as const
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -30,8 +34,13 @@ export function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false)
-    const target = document.querySelector(href)
-    target?.scrollIntoView({ behavior: "smooth" })
+    const [path, hash] = href.split("#")
+    // Na própria página: rola até a âncora. Em outra rota: navega.
+    if (path === pathname && hash) {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      router.push(href)
+    }
   }
 
   return (
@@ -51,7 +60,8 @@ export function Navbar() {
             href="#"
             onClick={(e) => {
               e.preventDefault()
-              window.scrollTo({ top: 0, behavior: "smooth" })
+              if (pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" })
+              else router.push("/")
             }}
             className="flex items-center gap-2 group"
             aria-label="Nexus Labs — início"
@@ -89,7 +99,7 @@ export function Navbar() {
           {/* CTA desktop */}
           <div className="hidden items-center md:flex">
             <button
-              onClick={() => handleNavClick("#contato")}
+              onClick={() => handleNavClick("/#contato")}
               className="inline-flex h-9 items-center gap-2 bg-[#caff33] px-5 font-body text-sm font-semibold text-[#0c0c0e] transition-all duration-200 hover:bg-[#b8e62e] active:scale-[0.98]"
               style={{ borderRadius: "6px" }}
             >
@@ -139,7 +149,7 @@ export function Navbar() {
 
           <div className="pt-8">
             <button
-              onClick={() => handleNavClick("#contato")}
+              onClick={() => handleNavClick("/#contato")}
               className="w-full bg-[#caff33] py-4 font-body font-semibold text-[#0c0c0e] transition-colors duration-200 hover:bg-[#b8e62e]"
               style={{ borderRadius: "6px" }}
             >

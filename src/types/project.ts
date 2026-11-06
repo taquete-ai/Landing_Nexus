@@ -23,7 +23,7 @@ export interface ProjectType {
     label: string;
     value: string;
   }[];
-  imageUrl: string;
+  imageUrl?: string;
   gradient?: {
     from: string;
     to: string;

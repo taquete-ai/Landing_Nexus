@@ -1,19 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { clientsMock } from "@/data/clients";
+import { partners } from "@/data/partners";
+import { PartnerCard } from "@/components/ui/PartnerCard";
+import type { PartnerType } from "@/types/partner";
 import { colors, fontFamily, radius, transitions, spacing } from "@/styles/design-tokens";
+
+/** Abaixo disso o marquee ficaria repetitivo — mostramos uma fileira estática. */
+const MARQUEE_MIN = 6;
 
 export function SocialProof() {
   const { ref, isVisible } = useScrollReveal();
 
-  const metrics = [
-    { value: "+20", label: "Empresas Atendidas" },
-    { value: "+50", label: "Automações Ativas" },
-    { value: "+300", label: "Leads Processados" },
-    { value: "24/7", label: "Infraestrutura" },
-  ];
+  // Nunca mostrar seção vazia nem inventada.
+  if (partners.length === 0) return null;
 
   return (
     <section
@@ -25,10 +27,8 @@ export function SocialProof() {
       }}
     >
       <div style={{ maxWidth: "1440px", margin: "0 auto", padding: `0 ${spacing.unit(2)}` }}>
-        {/* Header com métricas */}
         <div
           style={{
-            marginBottom: spacing.unit(10),
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(16px)",
             transition: `all ${transitions.reveal}`,
@@ -45,7 +45,7 @@ export function SocialProof() {
                 textTransform: "uppercase",
               }}
             >
-              Validação Social
+              Parceiros e Clientes
             </span>
           </div>
           <h2
@@ -55,112 +55,53 @@ export function SocialProof() {
               fontWeight: "700",
               color: colors.text,
               letterSpacing: "-1.5px",
-              marginBottom: spacing.unit(8),
+              marginBottom: spacing.unit(6),
             }}
           >
-            Infraestrutura Operacional Real
+            Quem já trabalha com a Nexus
           </h2>
 
-          {/* Métricas grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: spacing.unit(3),
-            }}
-            className="max-lg:grid-cols-2 max-sm:grid-cols-1"
-          >
-            {metrics.map((metric, idx) => (
-              <div
-                key={idx}
-                style={{
-                  padding: spacing.unit(3),
-                  backgroundColor: colors.surface,
-                  border: `1px solid ${colors.border}`,
-                  borderRadius: radius.md,
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateY(0)" : "translateY(16px)",
-                  transition: `all ${transitions.reveal}`,
-                  transitionDelay: `${100 + idx * 50}ms`,
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: fontFamily.display,
-                    fontSize: "32px",
-                    fontWeight: "700",
-                    color: colors.accent,
-                    letterSpacing: "-1px",
-                    marginBottom: spacing.unit(1),
-                  }}
-                >
-                  {metric.value}
-                </div>
-                <div
-                  style={{
-                    fontFamily: fontFamily.mono,
-                    fontSize: "11px",
-                    fontWeight: "600",
-                    color: colors.textMuted,
-                    letterSpacing: "0.05em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {metric.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          {partners.length >= MARQUEE_MIN ? (
+            <MarqueePartners partners={partners} />
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                backgroundColor: colors.surface,
+                border: `1px solid ${colors.border}`,
+                borderRadius: radius.md,
+                padding: `${spacing.unit(2)} ${spacing.unit(1)}`,
+              }}
+            >
+              {partners.map((p) => (
+                <PartnerCard key={p.id} partner={p} />
+              ))}
+            </div>
+          )}
 
-        {/* Divisor */}
-        <div
-          style={{
-            height: "1px",
-            backgroundColor: colors.borderSubtle,
-            marginBottom: spacing.unit(10),
-            opacity: isVisible ? 1 : 0,
-            transition: `opacity ${transitions.reveal}`,
-            transitionDelay: "300ms",
-          }}
-        />
-
-        {/* Marquee de clientes */}
-        <div
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(16px)",
-            transition: `all ${transitions.reveal}`,
-            transitionDelay: "400ms",
-          }}
-        >
-          <div
-            style={{
-              marginBottom: spacing.unit(4),
-            }}
-          >
-            <span
+          <div style={{ marginTop: spacing.unit(3) }}>
+            <Link
+              href="/parceiros"
               style={{
                 fontFamily: fontFamily.mono,
                 fontSize: "11px",
                 fontWeight: "600",
-                color: colors.textMuted,
+                color: colors.accent,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
               }}
             >
-              Parceiros e Clientes
-            </span>
+              Ver todos →
+            </Link>
           </div>
-
-          <MarqueeClients clients={clientsMock} />
         </div>
       </div>
     </section>
   );
 }
 
-function MarqueeClients({ clients }: { clients: (typeof clientsMock) }) {
+function MarqueePartners({ partners }: { partners: PartnerType[] }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -178,14 +119,9 @@ function MarqueeClients({ clients }: { clients: (typeof clientsMock) }) {
     >
       <style>{`
         @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-
         .marquee-track {
           display: flex;
           gap: ${spacing.unit(3)};
@@ -193,94 +129,15 @@ function MarqueeClients({ clients }: { clients: (typeof clientsMock) }) {
           animation: marquee 30s linear infinite;
           animation-play-state: ${isHovered ? "paused" : "running"};
         }
-
-        .marquee-track:hover {
-          animation-play-state: paused;
-        }
       `}</style>
 
       <div className="marquee-track">
-        {/* Primeira volta */}
-        {clients.map((client) => (
-          <ClientCard key={`original-${client.id}`} client={client} />
+        {partners.map((p) => (
+          <PartnerCard key={`original-${p.id}`} partner={p} />
         ))}
-        {/* Segunda volta — para seamless loop */}
-        {clients.map((client) => (
-          <ClientCard key={`duplicate-${client.id}`} client={client} />
+        {partners.map((p) => (
+          <PartnerCard key={`duplicate-${p.id}`} partner={p} />
         ))}
-      </div>
-    </div>
-  );
-}
-
-function ClientCard({ client }: { client: (typeof clientsMock)[0] }) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: spacing.unit(2),
-        padding: `${spacing.unit(1.5)} ${spacing.unit(2)}`,
-        flexShrink: 0,
-        minWidth: "200px",
-        cursor: "pointer",
-        transition: `all ${transitions.normal}`,
-      }}
-    >
-      {/* Avatar com iniciais */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "48px",
-          height: "48px",
-          borderRadius: radius.md,
-          backgroundColor: isHovered ? colors.accent : colors.surface,
-          border: `1px solid ${colors.border}`,
-          fontFamily: fontFamily.mono,
-          fontSize: "12px",
-          fontWeight: "600",
-          color: isHovered ? colors.bg : colors.text,
-          transition: `all ${transitions.normal}`,
-          filter: isHovered ? "grayscale(0%)" : "grayscale(60%)",
-        }}
-      >
-        {client.initials}
-      </div>
-
-      {/* Informações */}
-      <div style={{ minWidth: 0 }}>
-        <div
-          style={{
-            fontFamily: fontFamily.body,
-            fontSize: "13px",
-            fontWeight: "600",
-            color: isHovered ? colors.accent : colors.text,
-            transition: `color ${transitions.normal}`,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {client.name}
-        </div>
-        <div
-          style={{
-            fontFamily: fontFamily.mono,
-            fontSize: "10px",
-            fontWeight: "500",
-            color: colors.textMuted,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-          }}
-        >
-          {client.sector}
-        </div>
       </div>
     </div>
   );

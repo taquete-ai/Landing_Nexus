@@ -6,10 +6,3 @@ export interface TechItemType {
   category: TechCategory;
   description: string;
 }
-
-export interface ClientType {
-  id: string;
-  name: string;
-  initials: string;
-  sector: string;
-}

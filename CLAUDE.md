@@ -59,7 +59,8 @@ ChatWidget (M9)   → POST /api/chat (Claude Haiku) → coleta nome/email → PO
 - **`src/components/sections/`** — uma seção por arquivo; cada uma usa `useScrollReveal` para animação de entrada
 - **`src/components/layout/`** — Navbar (scroll-aware, menu mobile), Footer, ChatWidget (M9 — ainda não implementado)
 - **`src/components/sections/dashboard/`** — sub-componentes do DashboardDemo: MetricCard, PipelineBar, SystemStatus, MiniChart, ActivityFeed — todos alimentados por `src/data/dashboard-mock.ts`
-- **`src/data/projects-mock.ts`** — fonte de dados do ProjectShowcase; PipeFlow está no id `"2"` com disclaimer oficial
+- **`src/data/projects.ts`** — fonte de dados do ProjectShowcase. Só projetos reais e concluídos (PipeFlow Pro, Nexus Dashboard); nunca inventar métricas
+- **`src/data/partners.ts`** — parceiros e clientes reais (home + `/parceiros`). Adicionar = novo objeto; excluir = apagar o objeto; só aparece quem tem `authorized: true`. Logos em `public/partners/`
 - **`src/styles/design-tokens.ts`** — constantes TS espelhando os tokens CSS; use para referências em lógica, não em Tailwind
 
 ### Tokens de design no Tailwind v4
@@ -146,8 +147,9 @@ Fires once (unobserves após primeira intersecção). Stagger manual com `transi
 | Dashboard Demo | `components/sections/DashboardDemo.tsx` | ✅ |
 | Project Showcase | `components/sections/ProjectShowcase.tsx` | ✅ |
 | CTA Principal | `components/sections/CTASection.tsx` | ✅ |
-| Tech Stack + Social Proof | `components/sections/TechStack.tsx` / `SocialProof.tsx` | M6 |
-| Serviços + Feed Tecnológico | `components/sections/Services.tsx` / `TechFeed.tsx` | M7 |
+| Tech Stack | `components/sections/TechStack.tsx` | ✅ |
+| Serviços | `components/sections/Services.tsx` | ✅ (TechFeed fora da página até haver conteúdo real) |
+| Parceiros e Clientes | `components/sections/SocialProof.tsx` + `app/parceiros/page.tsx` | ✅ (M13) |
 | Chat Widget LLM | `components/layout/ChatWidget.tsx` | ✅ (M9) |
 | Footer | `components/layout/Footer.tsx` | ✅ |
 
