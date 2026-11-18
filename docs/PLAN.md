@@ -609,9 +609,10 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M13 — Conteúdo real + Parceiros e Clientes 🟡
+## M13 — Conteúdo real + Parceiros e Clientes ✅
 
-**Status:** 🟡 Código pronto, aguardando build/teste e deploy
+**Status:** ✅ Concluído e em produção — PR #10 mesclado em 2026-11-18 (`nexus-lab.pro`)
+**Branch:** `feat/real-content`
 
 **Objetivo:** Remover dados fictícios para a landing ser usada de verdade e criar um jeito simples de gerenciar parceiros e clientes.
 
@@ -624,11 +625,12 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 - [x] DashboardDemo rotulado como exemplo ilustrativo
 - [x] TechFeed removido da página (arquivos mantidos)
 - [x] OG image sem "12 Projetos / 8 Empresas"
-- [ ] Rodar `npm run build` e `npm run lint` (Node não estava no PATH na sessão)
+- [x] Build validado pelo deploy da Vercel (preview e produção). `npm run lint` ainda não rodado localmente
+- [x] Fix: título do Hero não estoura em celular (fonte fluida abaixo de 640px), conferido no preview em 400px
 - [x] Removidos `@nexuslabsai` e `foundingDate` (não eram reais); adicionados Claude Code e Claude Cowork ao stack; campo `website` de parceiros descartado
 - [ ] Detalhar o Nexus Dashboard (descrição hoje é genérica, ligada ao dashboard do PipeFlow)
-- [ ] Demais clientes/parceiros reais, logos e sites
-- [ ] Deploy e `curl` em `/parceiros` e `/sitemap.xml`
+- [ ] Demais clientes/parceiros reais e logos (sem site — campo descartado)
+- [x] Deploy e verificação em produção: `/`, `/parceiros`, `/politica-de-privacidade`, `/sitemap.xml` e `/opengraph-image` respondem 200; Ativ Solar presente; sem nomes fictícios na home
 
 ---
 
@@ -648,6 +650,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 | M10 | Nexus AI Orb + Conversational Presence | `feature/m10-nexus-orb-upgrade` (merged PR #7) | ✅ | P1 |
 | M11 | SEO + Performance | `feat/seo-performance` (merged PR #8) | ✅ | P1 |
 | M12 | Deploy Vercel | `feat/deploy` (merged PR #9) | 🟡 em produção, validações pendentes | P0 |
+| M13 | Conteúdo real + Parceiros | `feat/real-content` (merged PR #10) | ✅ | P0 |
 
 ---
 
