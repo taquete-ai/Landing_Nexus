@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: "%s | Nexus Labs",
   },
   description:
-    "Nexus Labs AI Systems — Ecossistema premium de IA, automação e desenvolvimento de software. Construímos sistemas inteligentes, CRMs, agentes IA e plataformas SaaS.",
+    "Equipe digital 24h para pequenos negócios: WhatsApp que atende, CRM que organiza vendas e automações que poupam tempo. Tecnologia com parceiro de verdade.",
   keywords: [
     "IA",
     "automação",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     url: "/",
     title: "Nexus Labs AI Systems",
     description:
-      "Ecossistema premium de IA, automação e desenvolvimento de software.",
+      "Equipe digital 24h para o seu negócio: WhatsApp, CRM e automações com parceiro de verdade.",
     siteName: "Nexus Labs",
     images: [
       {
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nexus Labs AI Systems",
     description:
-      "Ecossistema premium de IA, automação e desenvolvimento de software.",
+      "Equipe digital 24h para o seu negócio: WhatsApp, CRM e automações com parceiro de verdade.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -98,7 +98,7 @@ export default function RootLayout({
     name: "Nexus Labs AI Systems",
     url: siteUrl,
     description:
-      "Ecossistema premium de IA, automação e desenvolvimento de software",
+      "Equipe digital 24h para pequenos negócios: WhatsApp, CRM e automações com parceiro de verdade",
     image: `${siteUrl}/opengraph-image`,
     contactPoint: {
       "@type": "ContactPoint",
