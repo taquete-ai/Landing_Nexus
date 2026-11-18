@@ -75,7 +75,7 @@ export function Footer() {
             </a>
 
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-[#8a8a8f]">
-              Ecossistema premium de IA, automação e desenvolvimento de software. Construímos sistemas inteligentes para empresas que querem escalar.
+              Equipe digital 24h para pequenos negócios: WhatsApp que atende, CRM que organiza e automações que poupam tempo.
             </p>
 
             {/* Status operacional */}
