@@ -69,7 +69,7 @@ export function Hero() {
 
         {/* Headline */}
         <h1
-          className={`mb-6 font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight transition-all duration-700 ${
+          className={`mb-6 font-display text-[length:clamp(1.75rem,calc((100vw_-_48px)/9.2),3rem)] sm:text-6xl lg:text-7xl font-extrabold leading-tight transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{
