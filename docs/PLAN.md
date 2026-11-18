@@ -628,6 +628,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 - [x] Build validado pelo deploy da Vercel (preview e produção). `npm run lint` ainda não rodado localmente
 - [x] Fix: título do Hero não estoura em celular (fonte fluida abaixo de 640px), conferido no preview em 400px
 - [x] Removidos `@nexuslabsai` e `foundingDate` (não eram reais); adicionados Claude Code e Claude Cowork ao stack; campo `website` de parceiros descartado
+- [x] Nova descrição da Nexus ("Equipe digital 24h para pequenos negócios") no Hero, meta description, Open Graph, Twitter, JSON-LD, imagem de compartilhamento e Footer (PRs #12 e seguinte, 2026-11-18). Tom: dor do empresário (WhatsApp, CRM, automação), sem "premium" nem promessas não comprovadas
 - [ ] Detalhar o Nexus Dashboard (descrição hoje é genérica, ligada ao dashboard do PipeFlow)
 - [ ] Demais clientes/parceiros reais e logos (sem site — campo descartado)
 - [x] Deploy e verificação em produção: `/`, `/parceiros`, `/politica-de-privacidade`, `/sitemap.xml` e `/opengraph-image` respondem 200; Ativ Solar presente; sem nomes fictícios na home
