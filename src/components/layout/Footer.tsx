@@ -14,6 +14,7 @@ const FOOTER_LINKS = {
   Empresa: [
     { label: "Sobre a Nexus", href: "#" },
     { label: "Contato",       href: "#contato" },
+    { label: "Privacidade",   href: "/politica-de-privacidade" },
   ],
 } as const
 
