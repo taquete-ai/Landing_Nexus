@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectShowcaseProps, ProjectCategory } from "@/types/project";
-import { projectCategories } from "@/data/projects-mock";
+import { projectCategories } from "@/data/projects";
 import { colors, fontFamily, radius, transitions, spacing } from "@/styles/design-tokens";
 
 export function ProjectShowcase({

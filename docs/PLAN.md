@@ -576,30 +576,59 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 
 ---
 
-## M12 — Deploy Vercel
+## M12 — Deploy Vercel 🟡
 
-**Branch:** `feat/deploy`
-
-**Status:** — Próximo (em andamento)
+**Branch:** `feat/deploy` (merged via PR #9, commit `3bd7356`)
+**Status:** 🟡 Em produção — faltam analytics e validações pós-deploy
 
 **Objetivo:** Publicar a plataforma em produção na Vercel com CI/CD configurado e domínio vinculado.
 
 ### Entregas M12
 
-- [ ] Criar projeto na Vercel vinculado ao repositório
-- [ ] Configurar variáveis de ambiente no painel Vercel (Production + Preview): `PIPEFLOW_API_URL`, `PIPEFLOW_INGEST_TOKEN`, `ANTHROPIC_API_KEY`, `NEXT_PUBLIC_SITE_URL`
-- [ ] Verificar build de produção local com `npm run build`
-- [ ] Corrigir eventuais erros de build (tipos, imports, etc.)
-- [ ] Deploy inicial para Preview — validar todas as seções
-- [ ] Configurar domínio customizado (se disponível)
-- [ ] Ativar Vercel Analytics + Speed Insights
+- [x] Criar projeto na Vercel vinculado ao repositório (`landing-nexus`)
+- [x] Configurar variáveis de ambiente no painel Vercel: `PIPEFLOW_API_URL`, `PIPEFLOW_INGEST_TOKEN`, `ANTHROPIC_API_KEY`, `NEXT_PUBLIC_SITE_URL`
+- [x] Verificar build de produção local com `npm run build` (118kB First Load JS, zero erros TS)
+- [x] Deploy Production — `landing-nexus-eight.vercel.app` responde 200
+- [x] Configurar domínio customizado — `https://nexus-lab.pro` responde 200 (sitemap, robots e OG image também)
+- [x] Fallback de URLs em `layout.tsx`, `sitemap.ts` e `robots.ts` atualizado para `nexus-lab.pro`
+- [x] Corrigir navegação do Navbar (`id="tecnologias"`)
+- [x] Campo WhatsApp obrigatório no formulário do `CTASection` (igual ao ChatWidget)
+- [ ] Ativar Vercel Analytics + Speed Insights (`@vercel/analytics` e `@vercel/speed-insights` não estão instalados)
 - [ ] Validar formulário de contato em produção (lead aparece no PipeFlow)
 - [ ] Validar Chat Widget em produção (fluxo completo LLM → PipeFlow)
-- [ ] Validar OG image preview em WhatsApp/LinkedIn/Facebook
-- [ ] Deploy final para Production
+- [ ] Validar OG image preview em WhatsApp/LinkedIn/Facebook (endpoint responde 200; falta ver o preview nas redes)
 - [ ] Smoke test completo em produção (todas as seções, formulário, chatbot)
 
-**Commit final:** `feat: deploy production — Nexus Labs AI Systems live`
+**Commit:** `feat: M12 — Deploy Vercel, fix navbar Tecnologias, WhatsApp obrigatório` (99e7b2b)
+
+### Pendências conhecidas (fora do escopo original)
+
+- [ ] Remover `console.log` de env vars em `src/app/api/contact/route.ts`
+- [ ] Revisar dados mock de prova social (clientes, métricas do Hero, projetos) antes de divulgar
+- [ ] Organizar relatórios e scripts soltos na raiz do repositório (`M8_*.md`, `M9-*.md`, `TEST_*.md`, `*.mjs`)
+
+---
+
+## M13 — Conteúdo real + Parceiros e Clientes 🟡
+
+**Status:** 🟡 Código pronto, aguardando build/teste e deploy
+
+**Objetivo:** Remover dados fictícios para a landing ser usada de verdade e criar um jeito simples de gerenciar parceiros e clientes.
+
+- [x] `src/data/partners.ts` + `src/types/partner.ts` — fonte única de parceiros/clientes (`authorized: true` para exibir). Primeiro registro: Ativ Solar (Energia Solar)
+- [x] Página `/parceiros` + `PartnerCard` reutilizável + link no Navbar e no sitemap
+- [x] `SocialProof` sem contadores inventados; marquee só com 6+ parceiros, senão fileira estática; não renderiza se vazio
+- [x] Apagado `src/data/clients.ts` (12 clientes fictícios)
+- [x] Portfólio reduzido a PipeFlow Pro e Nexus Dashboard (`src/data/projects.ts`), sem métricas inventadas; filtros só das categorias existentes
+- [x] Hero com números derivados dos dados reais
+- [x] DashboardDemo rotulado como exemplo ilustrativo
+- [x] TechFeed removido da página (arquivos mantidos)
+- [x] OG image sem "12 Projetos / 8 Empresas"
+- [ ] Rodar `npm run build` e `npm run lint` (Node não estava no PATH na sessão)
+- [x] Removidos `@nexuslabsai` e `foundingDate` (não eram reais); adicionados Claude Code e Claude Cowork ao stack; campo `website` de parceiros descartado
+- [ ] Detalhar o Nexus Dashboard (descrição hoje é genérica, ligada ao dashboard do PipeFlow)
+- [ ] Demais clientes/parceiros reais, logos e sites
+- [ ] Deploy e `curl` em `/parceiros` e `/sitemap.xml`
 
 ---
 
@@ -618,7 +647,7 @@ Seções premium que funcionam como centro de atualizações (NEXUS INTEL), cat�
 | M9 | LLM Diagnostic Chat Widget | `feat/chat-widget` (merged main) | ✅ | P2 |
 | M10 | Nexus AI Orb + Conversational Presence | `feature/m10-nexus-orb-upgrade` (merged PR #7) | ✅ | P1 |
 | M11 | SEO + Performance | `feat/seo-performance` (merged PR #8) | ✅ | P1 |
-| M12 | Deploy Vercel | `feat/deploy` | — | P0 |
+| M12 | Deploy Vercel | `feat/deploy` (merged PR #9) | 🟡 em produção, validações pendentes | P0 |
 
 ---
 

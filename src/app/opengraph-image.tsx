@@ -145,11 +145,11 @@ export default async function Image() {
         }}
       >
         <div style={{ display: "flex", gap: "24px" }}>
-          <span>12 Projetos</span>
-          <span>8 Empresas</span>
-          <span>8 Tecnologias</span>
+          <span>IA</span>
+          <span>Automação</span>
+          <span>Software</span>
         </div>
-        <span style={{ color: "#555559" }}>nexuslabsai.vercel.app</span>
+        <span style={{ color: "#555559" }}>nexus-lab.pro</span>
       </div>
     </div>,
     {

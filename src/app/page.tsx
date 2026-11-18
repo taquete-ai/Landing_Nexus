@@ -5,8 +5,7 @@ import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { TechStack } from "@/components/sections/TechStack";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { Services } from "@/components/sections/Services";
-import { TechFeed } from "@/components/sections/TechFeed";
-import { projectsMock } from "@/data/projects-mock";
+import { projects } from "@/data/projects";
 
 export default function Home() {
   return (
@@ -19,7 +18,7 @@ export default function Home() {
 
       {/* M5 — Project Showcase */}
       <section id="projetos" aria-label="Projetos">
-        <ProjectShowcase projects={projectsMock} />
+        <ProjectShowcase projects={projects} />
       </section>
 
       {/* M6 — Tech Stack + Social Proof */}
@@ -28,10 +27,9 @@ export default function Home() {
         <SocialProof />
       </section>
 
-      {/* M7 — Services + Tech Feed */}
+      {/* M7 — Services (TechFeed fora da página até haver conteúdo real) */}
       <section id="solucoes" aria-label="Soluções">
         <Services />
-        <TechFeed />
       </section>
 
       {/* M8 — CTA + Contato */}

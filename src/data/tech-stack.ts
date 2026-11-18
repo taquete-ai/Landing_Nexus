@@ -80,6 +80,18 @@ export const techStackMock: TechItemType[] = [
     description: "Ferramenta de IA para análise e processamento de dados",
   },
   {
+    id: "claude-code",
+    name: "Claude Code",
+    category: "ia",
+    description: "Agente de código da Anthropic que usamos para desenvolver mais rápido",
+  },
+  {
+    id: "claude-cowork",
+    name: "Claude Cowork",
+    category: "ia",
+    description: "Assistente de IA da Anthropic para tarefas e rotinas do dia a dia",
+  },
+  {
     id: "cursor",
     name: "Cursor",
     category: "ia",

@@ -30,12 +30,8 @@ export function DashboardDemo() {
                 letterSpacing: "0.15em",
               }}
             >
-              DEMONSTRAÇÃO LIVE
+              EXEMPLO ILUSTRATIVO · DADOS DE DEMONSTRAÇÃO
             </span>
-            <div
-              className="h-1 w-1 rounded-full animate-pulse"
-              style={{ backgroundColor: colors.positive }}
-            />
           </div>
 
           <h2
@@ -47,7 +43,7 @@ export function DashboardDemo() {
               color: colors.text,
             }}
           >
-            Ecossistema em Tempo Real
+            Como um painel Nexus funciona
           </h2>
 
           <p
@@ -59,7 +55,7 @@ export function DashboardDemo() {
               maxWidth: "640px",
             }}
           >
-            Visualize métricas de operação, pipeline de conversão, status de sistemas e atividades em progresso. Uma janela real de como engenharia premium funciona.
+            Um exemplo de como organizamos métricas, pipeline de vendas, status dos sistemas e atividades em um só lugar. Os números abaixo são fictícios, apenas para demonstração.
           </p>
         </div>
 

@@ -2,11 +2,18 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
+import { projects } from "@/data/projects";
+import { partners } from "@/data/partners";
+import { techStackMock as techStack } from "@/data/tech-stack";
 
+// Números derivados dos dados reais — nunca digitados à mão.
+const clientCount = partners.filter((p) => p.kind === "cliente").length;
 const metrics = [
-  { value: "12", label: "Projetos Entregues" },
-  { value: "8", label: "Empresas Atendidas" },
-  { value: "8", label: "Tecnologias Premium" },
+  { value: String(projects.length), label: projects.length === 1 ? "Projeto Entregue" : "Projetos Entregues" },
+  ...(clientCount > 0
+    ? [{ value: String(clientCount), label: clientCount === 1 ? "Cliente Atendido" : "Clientes Atendidos" }]
+    : []),
+  { value: String(techStack.length), label: "Tecnologias" },
 ];
 
 export function Hero() {
@@ -62,7 +69,7 @@ export function Hero() {
 
         {/* Headline */}
         <h1
-          className={`mb-6 font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight transition-all duration-700 ${
+          className={`mb-6 font-display text-[length:clamp(1.75rem,calc((100vw_-_48px)/9.2),3rem)] sm:text-6xl lg:text-7xl font-extrabold leading-tight transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{
