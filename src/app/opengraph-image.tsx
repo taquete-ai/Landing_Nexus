@@ -125,7 +125,7 @@ export default async function Image() {
             maxWidth: "600px",
           }}
         >
-          Ecossistema premium de IA, automação e desenvolvimento de software.
+          Equipe digital 24h para o seu negócio: WhatsApp, CRM e automações.
         </div>
       </div>
 
@@ -145,9 +145,9 @@ export default async function Image() {
         }}
       >
         <div style={{ display: "flex", gap: "24px" }}>
-          <span>IA</span>
+          <span>WhatsApp</span>
+          <span>CRM</span>
           <span>Automação</span>
-          <span>Software</span>
         </div>
         <span style={{ color: "#555559" }}>nexus-lab.pro</span>
       </div>

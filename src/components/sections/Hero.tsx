@@ -69,7 +69,7 @@ export function Hero() {
 
         {/* Headline */}
         <h1
-          className={`mb-6 font-display text-[length:clamp(1.75rem,calc((100vw_-_48px)/9.2),3rem)] sm:text-6xl lg:text-7xl font-extrabold leading-tight transition-all duration-700 ${
+          className={`mb-6 font-display text-[length:clamp(1.75rem,calc((100vw_-_48px)/11),2.5rem)] sm:text-5xl lg:text-6xl font-extrabold leading-tight transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{
@@ -78,8 +78,10 @@ export function Hero() {
             color: "var(--color-text)",
           }}
         >
-          Engenharia de <br />
-          <span style={{ color: "var(--color-accent)" }}>Sistemas de IA</span>
+          Uma equipe digital{" "}
+          <span style={{ color: "var(--color-accent)" }}>
+            atendendo seus clientes 24 horas por dia.
+          </span>
         </h1>
 
         {/* Subheadline */}
@@ -92,9 +94,9 @@ export function Hero() {
             color: "var(--color-text-secondary)",
           }}
         >
-          Nexus Labs constrói soluções de IA em escala institucional. Automação
-          inteligente, agentes autônomos e dashboards operacionais para empresas
-          que competem em tempo real.
+          A Nexus monta o WhatsApp que responde, o CRM que organiza cada venda e
+          as automações que cuidam da rotina. Você foca no negócio, e a gente
+          cuida da tecnologia ao seu lado.
         </p>
 
         {/* CTAs */}
